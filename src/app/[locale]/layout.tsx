@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingChat } from "@/components/layout/FloatingChat";
 import { CookiesBanner } from "@/components/CookiesBanner";
 import { Toaster } from "@/components/ui/sonner";
+import { getOgLocale, getSiteUrl, siteName } from "@/lib/seo";
 import "../globals.css";
 
 const sans = Inter({
@@ -41,9 +42,29 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
+  const title = t("title");
+  const description = t("description");
+
   return {
-    title: t("title"),
-    description: t("description"),
+    metadataBase: new URL(getSiteUrl()),
+    applicationName: siteName,
+    title: {
+      default: title,
+      template: `%s | ${siteName}`,
+    },
+    description,
+    openGraph: {
+      title,
+      description,
+      siteName,
+      locale: getOgLocale(locale),
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

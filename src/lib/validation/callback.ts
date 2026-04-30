@@ -5,6 +5,8 @@ export const callbackSchema = z.object({
   phone: z.string().trim().min(5).max(40),
   locale: z.string().trim().min(2).max(5),
   source: z.string().trim().max(120).optional(),
+  website: z.string().trim().max(200).optional().or(z.literal("")),
+  startedAt: z.number().int().positive().optional(),
 });
 
 export type CallbackInput = z.infer<typeof callbackSchema>;

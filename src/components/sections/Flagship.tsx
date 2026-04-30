@@ -1,15 +1,16 @@
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
 import { photos } from "@/lib/data/gallery";
 import { Reveal } from "@/components/Reveal";
+import { getProjectProgress } from "@/lib/data/public-supabase";
 
-const TARGET_TREES = 100_000;
-const PLANTED_TREES = 0;
-
-export function Flagship() {
-  const t = useTranslations("flagship");
-  const pct = Math.min(100, (PLANTED_TREES / TARGET_TREES) * 100);
+export async function Flagship() {
+  const t = await getTranslations("flagship");
+  const progress = await getProjectProgress();
+  const pct = progress.target_trees > 0
+    ? Math.min(100, (progress.current_trees / progress.target_trees) * 100)
+    : 0;
 
   return (
     <section className="relative isolate overflow-hidden border-t border-border/60 bg-primary text-primary-foreground">
@@ -41,9 +42,9 @@ export function Flagship() {
                 {t("progressLabel")}
               </span>
               <span className="font-mono">
-                {PLANTED_TREES.toLocaleString()}{" "}
+                {progress.current_trees.toLocaleString()}{" "}
                 <span className="text-primary-foreground/60">
-                  {t("progressOf")} {TARGET_TREES.toLocaleString()}
+                  {t("progressOf")} {progress.target_trees.toLocaleString()}
                 </span>
               </span>
             </div>

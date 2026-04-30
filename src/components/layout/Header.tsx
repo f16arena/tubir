@@ -38,7 +38,12 @@ export function Header() {
           >
             {t("plant")}
           </Link>
-          <MobileMenu items={links} plantLabel={t("plant")} />
+          <MobileMenu
+            items={links}
+            plantLabel={t("plant")}
+            openLabel={t("menuOpen")}
+            closeLabel={t("menuClose")}
+          />
         </div>
       </div>
     </header>

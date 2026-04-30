@@ -1,24 +1,40 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { X } from "lucide-react";
 import { callbackSchema, type CallbackInput } from "@/lib/validation/callback";
-import { submitCallback } from "@/lib/actions/callback";
+import { submitCallback, type CallbackResult } from "@/lib/actions/callback";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 type Props = { open: boolean; onClose: () => void };
 
+function getDefaultValues(locale: string): CallbackInput {
+  return {
+    name: "",
+    phone: "",
+    locale,
+    source: typeof window !== "undefined" ? window.location.pathname : "",
+    website: "",
+    startedAt: Date.now(),
+  };
+}
+
+function FieldError({ children }: { children: React.ReactNode }) {
+  return <p className="text-xs font-medium text-destructive">{children}</p>;
+}
+
 export function CallbackModal({ open, onClose }: Props) {
   const t = useTranslations("callback");
   const locale = useLocale();
   const [isPending, startTransition] = useTransition();
   const [done, setDone] = useState(false);
+  const nameRef = useRef<HTMLInputElement | null>(null);
 
   const {
     register,
@@ -27,12 +43,23 @@ export function CallbackModal({ open, onClose }: Props) {
     reset,
   } = useForm<CallbackInput>({
     resolver: zodResolver(callbackSchema),
-    defaultValues: { name: "", phone: "", locale, source: "" },
+    defaultValues: getDefaultValues(locale),
   });
+
+  const nameRegistration = register("name");
+
+  const handleClose = useCallback(() => {
+    setDone(false);
+    onClose();
+  }, [onClose]);
+
+  function getErrorText(error: Exclude<CallbackResult, { ok: true }>["error"]) {
+    return t(`errors.${error}`);
+  }
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && handleClose();
     document.addEventListener("keydown", onKey);
     const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -40,18 +67,13 @@ export function CallbackModal({ open, onClose }: Props) {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = original;
     };
-  }, [open, onClose]);
+  }, [handleClose, open]);
 
   useEffect(() => {
-    if (open) {
-      setDone(false);
-      reset({
-        name: "",
-        phone: "",
-        locale,
-        source: typeof window !== "undefined" ? window.location.pathname : "",
-      });
-    }
+    if (!open) return;
+    reset(getDefaultValues(locale));
+    const timer = window.setTimeout(() => nameRef.current?.focus(), 0);
+    return () => window.clearTimeout(timer);
   }, [open, locale, reset]);
 
   if (!open) return null;
@@ -63,7 +85,7 @@ export function CallbackModal({ open, onClose }: Props) {
         toast.success(t("successTitle"), { description: t("successText") });
         setDone(true);
       } else {
-        toast.error(t("errorTitle"), { description: t("errorText") });
+        toast.error(t("errorTitle"), { description: getErrorText(res.error) });
       }
     });
   };
@@ -73,13 +95,13 @@ export function CallbackModal({ open, onClose }: Props) {
       <button
         type="button"
         aria-label={t("close")}
-        onClick={onClose}
+        onClick={handleClose}
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
       />
       <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-border bg-background shadow-2xl">
         <button
           type="button"
-          onClick={onClose}
+          onClick={handleClose}
           aria-label={t("close")}
           className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground/70 hover:bg-muted hover:text-foreground"
         >
@@ -94,20 +116,36 @@ export function CallbackModal({ open, onClose }: Props) {
             <div className="mt-6 rounded-lg border border-primary/40 bg-primary/5 p-4 text-center">
               <h4 className="text-base font-semibold">{t("successTitle")}</h4>
               <p className="mt-1 text-sm text-muted-foreground">{t("successText")}</p>
-              <Button variant="ghost" size="sm" onClick={onClose} className="mt-3">
+              <Button variant="ghost" size="sm" onClick={handleClose} className="mt-3">
                 {t("close")}
               </Button>
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-4">
+              <div className="sr-only" aria-hidden="true">
+                <Label htmlFor="cb-website">Website</Label>
+                <Input
+                  id="cb-website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  {...register("website")}
+                />
+              </div>
+              <input type="hidden" {...register("startedAt", { valueAsNumber: true })} />
+
               <div className="space-y-1.5">
                 <Label htmlFor="cb-name">{t("name")}</Label>
                 <Input
                   id="cb-name"
                   placeholder={t("namePh")}
                   aria-invalid={!!errors.name}
-                  {...register("name")}
+                  {...nameRegistration}
+                  ref={(node) => {
+                    nameRegistration.ref(node);
+                    nameRef.current = node;
+                  }}
                 />
+                {errors.name ? <FieldError>{t("fieldRequired")}</FieldError> : null}
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="cb-phone">{t("phone")}</Label>
@@ -118,6 +156,7 @@ export function CallbackModal({ open, onClose }: Props) {
                   aria-invalid={!!errors.phone}
                   {...register("phone")}
                 />
+                {errors.phone ? <FieldError>{t("phoneInvalid")}</FieldError> : null}
               </div>
               <Button type="submit" disabled={isPending} className="w-full">
                 {isPending ? t("submitting") : t("submit")}

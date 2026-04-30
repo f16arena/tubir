@@ -153,6 +153,10 @@ npm run dev
 4. Раздел **Environment Variables** — добавь:
    - `NEXT_PUBLIC_SUPABASE_URL` = твой Supabase URL
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = твой anon key
+   - `NEXT_PUBLIC_SITE_URL` = публичный адрес сайта, например `https://tubir.kz` или временно `https://tubir.vercel.app`
+   - `TELEGRAM_BOT_TOKEN` = опционально, токен бота для уведомлений о заявках
+   - `TELEGRAM_CHAT_ID` = опционально, chat id куда слать уведомления
+   - `SUBMISSION_WEBHOOK_URL` = опционально, внешний webhook для CRM/Make/Zapier/почты
 5. **Deploy**
 
 Через 1–2 минуты сайт будет на `https://tubir.vercel.app` (или похожем поддомене).

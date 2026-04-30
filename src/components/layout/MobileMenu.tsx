@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { usePathname } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -12,17 +11,15 @@ type Item = { href: string; label: string };
 export function MobileMenu({
   items,
   plantLabel,
+  openLabel,
+  closeLabel,
 }: {
   items: Item[];
   plantLabel: string;
+  openLabel: string;
+  closeLabel: string;
 }) {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-
-  // Close menu on route change.
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   // Lock body scroll while open.
   useEffect(() => {
@@ -39,7 +36,7 @@ export function MobileMenu({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Open menu"
+        aria-label={openLabel}
         className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground/80 hover:bg-muted hover:text-foreground md:hidden"
       >
         <Menu className="h-5 w-5" />
@@ -53,7 +50,7 @@ export function MobileMenu({
         >
           <button
             type="button"
-            aria-label="Close menu"
+            aria-label={closeLabel}
             onClick={() => setOpen(false)}
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
           />
@@ -63,7 +60,7 @@ export function MobileMenu({
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                aria-label="Close menu"
+                aria-label={closeLabel}
                 className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground/80 hover:bg-muted hover:text-foreground"
               >
                 <X className="h-5 w-5" />
@@ -74,6 +71,7 @@ export function MobileMenu({
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={() => setOpen(false)}
                   className="rounded-lg px-3 py-3 text-base font-medium text-foreground hover:bg-muted"
                 >
                   {item.label}
@@ -83,6 +81,7 @@ export function MobileMenu({
             <div className="border-t border-border p-3">
               <Link
                 href="/plant"
+                onClick={() => setOpen(false)}
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "h-11 w-full text-base",

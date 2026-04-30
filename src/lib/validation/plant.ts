@@ -18,6 +18,8 @@ export const plantRequestSchema = z.object({
   quantity: z.number().int().min(1).max(1000),
   dedication: z.string().trim().max(200).optional().or(z.literal("")),
   locale: z.string().trim().min(2).max(5),
+  website: z.string().trim().max(200).optional().or(z.literal("")),
+  startedAt: z.number().int().positive().optional(),
 });
 
 export type PlantRequestInput = z.infer<typeof plantRequestSchema>;

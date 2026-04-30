@@ -3,7 +3,8 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { SPECIES, formatKzt } from "@/lib/data/species";
+import { formatKzt } from "@/lib/data/species";
+import { getSpeciesCatalog } from "@/lib/data/public-supabase";
 import { speciesPhotos } from "@/lib/data/gallery";
 import { TreePine, TreeDeciduous, Apple, Cherry } from "lucide-react";
 import type { SpeciesCode } from "@/lib/db/types";
@@ -27,6 +28,7 @@ export default async function TreesPage({
   setRequestLocale(locale);
   const t = await getTranslations("trees");
   const tPlant = await getTranslations("plant");
+  const species = await getSpeciesCatalog();
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
@@ -40,7 +42,7 @@ export default async function TreesPage({
       </Reveal>
 
       <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {SPECIES.map((s, i) => {
+        {species.map((s, i) => {
           const Icon = ICONS[s.code];
           return (
             <Reveal key={s.code} delay={(i % 3) * 80}>

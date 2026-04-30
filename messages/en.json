@@ -1,0 +1,503 @@
+{
+  "meta": {
+    "title": "Túbir — One man, one root",
+    "description": "Plant a real tree in East Kazakhstan. We plant for you, you get a video proof. Bring back the green of the region — with us."
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "trees": "Species",
+      "how": "How it works",
+      "about": "About",
+      "plant": "Plant a tree"
+    }
+  },
+  "hero": {
+    "badge": "Startup · at the start of the road",
+    "tagline": "Túbir",
+    "slogan": "One man — one root",
+    "lead": "An old truth: every man should plant a tree. You don't have the land — we do. You pick the species, we plant it in East Kazakhstan, film the day, and tend it for the first three years. The root stays here — and it will outlive you.",
+    "cta": "Plant your root",
+    "ctaSecondary": "How it works",
+    "stats": [
+      { "value": "100,000", "label": "trees, our goal" },
+      { "value": "East KZ", "label": "our land" },
+      { "value": "3 years", "label": "of care after planting" }
+    ]
+  },
+  "honest": {
+    "label": "Straight up",
+    "title": "Túbir is a startup. We haven't planted a single tree yet.",
+    "text": "Right now we have a goal, a team and a plan. What we don't have yet — is a planted forest. We're getting ready for the first batch: scouting land, talking to nurseries, working out the costs. That's why we don't show you photos of our own forests — we don't have any yet. We're asking you to be one of the first to trust us with your tree. Every report you'll get will be a real one — from the day the first spade enters the ground.",
+    "counterLabel": "reserved",
+    "counterValue": "0",
+    "counterOf": "of 100,000",
+    "counterHint": "Be the first.",
+    "cta": "Be one of the first"
+  },
+  "future": {
+    "title": "If we don't take this on — nothing will be left for our children.",
+    "text": "A tree lives for hundreds of years. But first, someone has to plant it."
+  },
+  "process": {
+    "title": "How we do it",
+    "subtitle": "Every step — in the open, with photo and video",
+    "items": [
+      { "title": "Sapling", "text": "We source saplings from trusted nurseries in our region." },
+      { "title": "Planting", "text": "In the planting season the team drives out and plants." },
+      { "title": "Growing", "text": "We water and tend the trees for the first 3 critical years." },
+      { "title": "Forest", "text": "In 5–10 years the trees close in and become a living forest." }
+    ],
+    "placeholderNote": "Photos are illustrative — we will replace them with our own after the first planting."
+  },
+  "ctaBottom": {
+    "title": "It takes three minutes. It stays for a hundred years.",
+    "text": "Send a request — we'll get back within 24 hours and arrange the planting.",
+    "button": "Plant a tree"
+  },
+  "mission": {
+    "title": "Why this matters",
+    "items": [
+      {
+        "title": "A man's duty",
+        "text": "Build a house, plant a tree, raise a son. Of the three, the tree is the one you can't do from a ninth-floor flat. We move it from impossible to a single click — no fakes, no virtual reality, the real thing."
+      },
+      {
+        "title": "The air we breathe",
+        "text": "Around 83,000 tonnes of harmful emissions a year hang over our region. East Kazakhstan has sat on the country's dirtiest-air list for years. One tree won't stop a factory. But 100,000 trees is a forest. And a forest breathes for us."
+      },
+      {
+        "title": "After the polygon",
+        "text": "456 nuclear blasts in 40 years. 1.7 million people under the fallout. Fields where livestock can't graze. Wells you can't drink from. This land wasn't chosen — it was simply convenient to give away for testing. Now it's time to heal it. A tree is the oldest medicine there is."
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "subtitle": "Four steps from your intention to a living tree",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Choose a species",
+        "text": "Pine, birch, spruce, oak, or fruit — each plays its own role."
+      },
+      {
+        "n": "02",
+        "title": "Pay for planting",
+        "text": "The price covers the sapling, planting, watering and three years of care."
+      },
+      {
+        "n": "03",
+        "title": "We plant and film it",
+        "text": "In planting season our team plants the tree on the project's land and films a short video."
+      },
+      {
+        "n": "04",
+        "title": "You receive proof and certificate",
+        "text": "Video, GPS coordinates and a personal certificate land in your account."
+      }
+    ]
+  },
+  "flagship": {
+    "label": "Flagship project",
+    "title": "Green lungs of our region",
+    "text": "For decades East Kazakhstan gave the country metal, uranium, weapons. All that time, it was giving away its own air, its own water, its own forests. Túbir is giving them back. One tree at a time. The goal — 100,000 living trees on our own land. The bigger goal — that the region stops being called just \"industrial\" and starts being called green again.",
+    "progressLabel": "Trees planted",
+    "progressOf": "of"
+  },
+  "tazaQazaqstan": {
+    "title": "Part of «Taza Qazaqstan»",
+    "text": "Túbir is a private initiative under the national «Taza Qazaqstan» concept. In two years of the state programme around 5.5 million trees have been planted across the country. We add our share."
+  },
+  "footer": {
+    "tagline": "One man — one root",
+    "rights": "© 2026 Túbir. All rights reserved.",
+    "contact": "Contact",
+    "social": "Social",
+    "region": "Ust-Kamenogorsk, East Kazakhstan",
+    "legal": "Documents",
+    "offerLink": "Public offer",
+    "privacyLink": "Privacy policy",
+    "refundLink": "Refund policy",
+    "company": "Túbir LLP — registration in progress. BIN and bank details will appear here once the company is incorporated.",
+    "extras": "More",
+    "roadmapLink": "Roadmap",
+    "businessLink": "For business",
+    "diasporaLink": "For diaspora",
+    "projects": "Projects",
+    "polygonLink": "Atonement Forest",
+    "atamekenLink": "Forest of surnames",
+    "productsLink": "Special offerings",
+    "giftLink": "Gift a root",
+    "certificateLink": "Certificate"
+  },
+  "cookies": {
+    "text": "We use cookies to make the site faster and more comfortable. By continuing you agree.",
+    "accept": "Accept",
+    "more": "More"
+  },
+  "callback": {
+    "trigger": "Call me back",
+    "title": "Want us to call you?",
+    "subtitle": "Leave your number — we'll call within an hour during business hours.",
+    "name": "Name",
+    "namePh": "Your name",
+    "phone": "Phone",
+    "phonePh": "+7 ...",
+    "submit": "Waiting for your call",
+    "submitting": "Sending...",
+    "successTitle": "Got it",
+    "successText": "We'll call back within an hour.",
+    "errorTitle": "Couldn't send",
+    "errorText": "Try again or message us on WhatsApp.",
+    "close": "Close"
+  },
+  "chat": {
+    "whatsapp": "WhatsApp",
+    "telegram": "Telegram"
+  },
+  "legal": {
+    "lastUpdated": "Effective from 01 May 2026",
+    "offerTitle": "Public offer",
+    "offerLead": "This document is a public offer. By making a payment on tubir.kz you enter into a contract with us under the terms below.",
+    "offerSections": [
+      {
+        "title": "1. Parties",
+        "text": "Túbir LLP (the \"Provider\"), website tubir.kz, registration in Kazakhstan in progress. The Customer is any individual or legal entity who places a request or makes a payment."
+      },
+      {
+        "title": "2. Subject of the contract",
+        "text": "For the price published on the site, the Provider organises the planting of a tree (or trees) of the chosen species on the project's land in East Kazakhstan, takes care of the tree for 36 months after planting, and provides the Customer with a video report and a personal certificate."
+      },
+      {
+        "title": "3. Price and payment",
+        "text": "The price is shown on each species page and includes the sapling, the planting work, watering and three years of care. Payments are made via Halyk ePay, Kaspi Pay, card or bank transfer to the Provider's account."
+      },
+      {
+        "title": "4. Timing",
+        "text": "Planting takes place in the next suitable season (spring or autumn). The video report and GPS coordinates are sent to the Customer within 30 days of planting."
+      },
+      {
+        "title": "5. Survival guarantee",
+        "text": "If the tree does not survive within the first 12 months, the Provider plants a new tree of the same species at no extra cost and sends a fresh report."
+      },
+      {
+        "title": "6. Refund",
+        "text": "Before physical planting, the Customer may cancel within 7 calendar days and receive a full refund. After planting the service is considered fulfilled and refunds are no longer available."
+      },
+      {
+        "title": "7. Force majeure",
+        "text": "Parties are released from liability for non-performance caused by force majeure (natural disasters, wildfires, epidemics, government action)."
+      },
+      {
+        "title": "8. Contact",
+        "text": "All questions — hello@tubir.kz. Address and bank details will be published once the LLP is incorporated."
+      }
+    ],
+    "privacyTitle": "Privacy policy",
+    "privacyLead": "We care about your data and use it only to handle your request and contact you.",
+    "privacySections": [
+      {
+        "title": "1. What we collect",
+        "text": "Name, email, phone, country, dedication text (optional) — what you submit through the form. Plus cookies for site operation and basic analytics (country, language, visit time)."
+      },
+      {
+        "title": "2. Why",
+        "text": "To contact you about your request, issue an invoice, agree the planting and send the report."
+      },
+      {
+        "title": "3. Where",
+        "text": "In a secure Supabase database (data centres in EU or US depending on region). Access is limited to the Túbir team."
+      },
+      {
+        "title": "4. To whom",
+        "text": "To no one, except where required by Kazakhstani law. Payment data is processed by the acquiring bank (Halyk Bank); we don't store it."
+      },
+      {
+        "title": "5. Your rights",
+        "text": "You can request a copy, correction or full deletion of your data by writing to hello@tubir.kz. We respond within 30 days."
+      },
+      {
+        "title": "6. Cookies",
+        "text": "We use technical cookies for site operation and analytics cookies for improvements. They can be disabled in your browser settings."
+      }
+    ],
+    "refundTitle": "Refund policy",
+    "refundLead": "Refunds are possible — but the logic differs from a normal purchase, because once the tree is in the ground the service is considered done.",
+    "refundSections": [
+      {
+        "title": "Before planting — 100% refund",
+        "text": "At any moment before the actual planting, you can cancel. We refund within 7 business days to the same payment method."
+      },
+      {
+        "title": "After planting — no refund",
+        "text": "The tree is in the ground, the work is done, the sapling and labour are paid for. No refund applies."
+      },
+      {
+        "title": "If the tree doesn't survive",
+        "text": "Within the first 12 months after planting we plant a new tree of the same species, free of charge. No extra payment from you."
+      },
+      {
+        "title": "How to request a refund",
+        "text": "Write to hello@tubir.kz with the subject \"Refund\", include your request number and reason. We reply within 2 business days."
+      }
+    ]
+  },
+  "trees": {
+    "title": "Tree species",
+    "subtitle": "Each species plays a role in restoring the forest",
+    "yearsToMaturity": "years to maturity",
+    "co2": "CO₂ absorbed",
+    "perTree": "per tree",
+    "comingSoonPrice": "price soon",
+    "select": "Choose",
+    "list": {
+      "pine": {
+        "name": "Scots pine",
+        "description": "The backbone of Semey orman. Hardy, cleans the air all year round."
+      },
+      "birch": {
+        "name": "Silver birch",
+        "description": "Fast-growing, the symbol of forests reborn after fire."
+      },
+      "spruce": {
+        "name": "Siberian spruce",
+        "description": "Lives up to 300 years. A tree for your descendants."
+      },
+      "oak": {
+        "name": "Mongolian oak",
+        "description": "Tough, slow-growing. A tree that will outlive you."
+      },
+      "apple": {
+        "name": "Sievers apple",
+        "description": "The wild ancestor of every apple in the world — native to Kazakhstan."
+      },
+      "apricot": {
+        "name": "Apricot",
+        "description": "Blossoms in spring, bears fruit, gives shade in summer."
+      }
+    }
+  },
+  "plant": {
+    "title": "Plant a tree",
+    "subtitle": "Fill the form — we'll get back to you and arrange the planting",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+7 ...",
+      "country": "Country",
+      "countryPlaceholder": "Kazakhstan",
+      "species": "Tree species",
+      "speciesPlaceholder": "Pick a species",
+      "quantity": "Number of trees",
+      "dedication": "Dedication (optional)",
+      "dedicationPlaceholder": "Name on the plaque or who it's for",
+      "submit": "Send request",
+      "submitting": "Sending...",
+      "successTitle": "Request received",
+      "successText": "We will get back to you within 24 hours.",
+      "errorTitle": "Could not send",
+      "errorText": "Please try again or contact us directly."
+    },
+    "noOnlinePay": "Online payments are being set up — for now we work by request and send invoices manually."
+  },
+  "about": {
+    "title": "About",
+    "missionTitle": "Mission",
+    "missionText": "Túbir was born from a simple thought. Millions of men in big cities will never plant a tree — unless someone gives them the land. And millions of hectares of Kazakh land are waiting for those trees. Especially here, in East Kazakhstan, where the factories ran for decades and the nuclear charges went off. We bring those two truths together. You bring the meaning and the means. We bring the land, the hands, the time.",
+    "teamTitle": "Team",
+    "teamText": "We're a team from East Kazakhstan. Our parents live here. Our children will live here too. We buy the land, bring the saplings, dig, water, film. Faces and stories — coming soon.",
+    "joinTitle": "Join in",
+    "joinText": "Wherever you live — Almaty, Astana, Moscow or London — your root can grow here. On land that remembers both the nuclear tests and decades of factory smoke. A hundred years from now, you'll be gone. The tree planted in your name will still be standing here — giving shade to people not yet born."
+  },
+  "common": {
+    "loading": "Loading...",
+    "comingSoon": "Coming soon"
+  },
+  "gift": {
+    "title": "Gift a root",
+    "subtitle": "When a gift should outlive you",
+    "lead": "He has everything. But no tree planted in his honour, on land that was native to his grandfathers. Gift one — it will still be there when no one remembers what the gift was for.",
+    "stepsTitle": "How it works",
+    "steps": [
+      "Pick the species and the number of trees",
+      "Add the recipient's name and email",
+      "Write a short dedication — it will appear on the certificate",
+      "The recipient gets an e-card, and later — a planting video"
+    ],
+    "occasionsTitle": "When people gift",
+    "occasions": [
+      "Father's birthday",
+      "Wedding",
+      "Women's Day",
+      "Nauryz",
+      "Friend's anniversary",
+      "Team gift"
+    ],
+    "noteTitle": "Same price",
+    "noteText": "A gift planting costs exactly the same as a regular one. No surcharge for the \"special format.\"",
+    "ctaTitle": "Gift a tree",
+    "ctaText": "Next is the regular request form. In the \"Dedication\" field write the recipient's name and a few warm words.",
+    "ctaButton": "Open gift form"
+  },
+  "certificate": {
+    "title": "Certificate",
+    "subtitle": "This is what the document looks like after the planting.",
+    "lead": "Every tree planted through Túbir gets a personal certificate — digital immediately, paper on request. Below — an example.",
+    "sample": {
+      "issuer": "Túbir · East Kazakhstan",
+      "title": "Personal certificate",
+      "subtitle": "Confirms that a real tree has been planted in East Kazakhstan",
+      "owner": "Owner's name",
+      "ownerValue": "Aibek Zhumabayev",
+      "species": "Species",
+      "speciesValue": "Scots pine",
+      "date": "Planted on",
+      "dateValue": "12.10.2026",
+      "gps": "GPS",
+      "gpsValue": "49.95° N · 82.61° E",
+      "dedication": "Dedication",
+      "dedicationValue": "To grandfather — who taught me to live by the roots.",
+      "id": "Number",
+      "idValue": "TU-2026-000001",
+      "footerLine": "One man — one root"
+    },
+    "elementsTitle": "What's inside",
+    "elements": [
+      "Owner's name",
+      "Species, date and place of planting",
+      "GPS coordinates — open on any map",
+      "Tree number — for lookup in your account",
+      "QR code linking to your tree's public page"
+    ],
+    "noteTitle": "When you receive it",
+    "noteText": "Digital certificate — at the moment of planting. Paper version on request, shipping within Kazakhstan and abroad."
+  },
+  "polygon": {
+    "label": "Special project",
+    "title": "Atonement Forest of the Polygon",
+    "subtitle": "Trees on the land that took the heaviest hit — and is still silent about it.",
+    "lead": "In 40 years the Semipalatinsk Polygon absorbed 456 nuclear blasts. Radioactive fallout covered 304,000 square kilometres. 1.7 million people lived underneath it. And land where nothing was supposed to grow again.",
+    "concept": "What we want to do",
+    "conceptText": "A separate flagship project of Túbir on lands adjacent to the former test site. Every tree here carries the dedication \"to those who couldn't grow up here.\" This isn't marketing — it's an attempt to bring life back to where it was taken.",
+    "blocks": [
+      { "title": "Partnership with NNC RK", "text": "We are in dialogue with the National Nuclear Center of Kazakhstan to agree planting sites and protocols in the safe zones." },
+      { "title": "Coordination with Abai region", "text": "We are reaching out to the akimat and the Department of Natural Resources of Abai region. Semey orman is under their jurisdiction." },
+      { "title": "Dedications, not names", "text": "There's no \"Ivan Petrov\" certificate here. Here it's \"in memory of grandfather, who didn't live to 60.\" A different tone." },
+      { "title": "Free for the affected", "text": "Families officially recognised as affected by the nuclear tests can plant a tree free of charge — that's the first thing we're working towards." }
+    ],
+    "statusLabel": "Status",
+    "statusValue": "Concept. Partnership in development. Launch — 2027.",
+    "cta": "I want to join",
+    "ctaText": "Send a request — we'll let you know when the project opens. Affected families and aligned organisations — first in line."
+  },
+  "atameken": {
+    "label": "Special project",
+    "title": "Forest of surnames",
+    "subtitle": "A map of Kazakhstan where your family's trees grow.",
+    "lead": "Thirty years from now your grandson will open the Túbir map, type in his surname — and see a dot. He'll go there, find the tree under which a coordinate carries your name. He'll sit in the shade and understand his family has roots here.",
+    "concept": "What we want to do",
+    "conceptText": "An open map of Kazakhstan with the coordinates of every Túbir tree. Search by surname. Every family — its own growing forest. Over time — dozens of points of one surname in different regions. A visual family tree built from real trees.",
+    "blocks": [
+      { "title": "Search by surname", "text": "Type in a surname — the map shows all trees planted by people of that family or in their honour." },
+      { "title": "Family bundle", "text": "You can group your family's trees into one cluster — a shared family forest with one entry point." },
+      { "title": "Pass it on", "text": "Access to the family forest can be passed to children, grandchildren — like a family archive." },
+      { "title": "Open map", "text": "The map is public. Anyone can find their surname or look at the country's map ten years from now." }
+    ],
+    "statusLabel": "Status",
+    "statusValue": "Technical concept. Map launch — Q1 2027, after the first batch of plantings.",
+    "cta": "Lay the first root of your family",
+    "ctaText": "When the tree is planted and gets coordinates — it goes straight to the map under your surname."
+  },
+  "products": {
+    "title": "Special offerings",
+    "subtitle": "When a tree is more than just a tree. Several formats, each with its own story.",
+    "list": [
+      {
+        "code": "triple",
+        "title": "Triple duty",
+        "subtitle": "House · tree · son — literally in one box",
+        "description": "A gift box for the man who jokes he ought to plant a tree but never gets around to it. Inside: a symbolic handmade brick (a piece of an old house), a planting certificate with GPS coordinates in East Kazakhstan, a voucher for a children's book about Kazakh nature for future or already-born kids. House — one stone. Tree — real. Son — a place for the book.",
+        "status": "Coming soon",
+        "cta": "Be the first to know"
+      },
+      {
+        "code": "coming-of-age",
+        "title": "Coming-of-age tree",
+        "subtitle": "When your son turns eighteen",
+        "description": "A tree planted in honour of the eighteenth birthday. With GPS coordinates and a \"root passport\" — a small paper booklet with photo, coordinates, date and place of planting. You'll come back to this place in 5, 10, 30 years. The tree will be there. Growing alongside him.",
+        "status": "Coming soon",
+        "cta": "Be the first to know"
+      },
+      {
+        "code": "memory",
+        "title": "In memory",
+        "subtitle": "A tree instead of a wreath",
+        "description": "When someone close passes — on the land where they lived, you can leave not a stone but a tree. You can come back ten years later. The certificate — quiet, dark-toned. Coordinates — forever.",
+        "status": "Coming soon",
+        "cta": "Be the first to know"
+      },
+      {
+        "code": "gift",
+        "title": "Gift a root",
+        "subtitle": "When you don't know what to give a man who has everything",
+        "description": "He has a car, a watch, a gym membership, a streaming subscription. What he doesn't have is a tree planted in his honour. An e-card by email + a certificate in his name + a video report when we plant it. Works for International Women's Day, birthdays, weddings.",
+        "status": "Available via the form",
+        "cta": "Gift"
+      }
+    ]
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "subtitle": "What and when. No slogans — dates and steps.",
+    "stages": [
+      { "label": "Now · Q2 2026", "title": "Team, concept, website", "text": "Mission and identity locked in. Trilingual website live. Accepting first requests and building partnerships.", "status": "current" },
+      { "label": "Q3 2026", "title": "LLP, domain, land, nurseries", "text": "Incorporate the LLP in Kazakhstan. Buy land in East Kazakhstan. Sign contracts with local nurseries. Wire up Halyk ePay and Kaspi Pay.", "status": "next" },
+      { "label": "Q4 2026", "title": "First batch — 250 trees", "text": "Autumn planting season. First video report, first certificates, GPS passport for every tree.", "status": "planned" },
+      { "label": "Q1 2027", "title": "1,000 trees and personal account", "text": "Launch of the personal dashboard: your roots, statuses, video, PDF certificate. Integration with Halyk Орманы on saplings.", "status": "planned" },
+      { "label": "Q2 2027", "title": "5,000 trees and B2B channel", "text": "Corporate stream for East-KZ enterprises. ESG reports, corporate planting days.", "status": "planned" },
+      { "label": "2027 and onwards", "title": "Goal — 100,000 trees", "text": "Expansion into new sites in Abai region. \"Coming-of-age tree\" programme in East-KZ schools. A forest with names.", "status": "vision" }
+    ],
+    "honestNote": "This isn't a marketing plan — it's what we genuinely intend to do. If anything shifts, we'll update publicly."
+  },
+  "business": {
+    "title": "Túbir for business",
+    "subtitle": "Real plantings in East Kazakhstan for companies that take their environmental footprint seriously.",
+    "lead": "East Kazakhstan is the country's industrial heart. If your business operates here, your reputation and ESG reporting depend not on how much you spent on PR, but on what actually stands on the ground.",
+    "blocks": [
+      { "title": "CO₂ offset", "text": "We compute the equivalent of your annual emissions and plant species that work for carbon retention in the East-KZ climate." },
+      { "title": "Corporate plantings", "text": "Your company team comes out to the project's land, plants under your brand, gets photo and video reports for the CSR team and social channels." },
+      { "title": "ESG reporting", "text": "Documentation for non-financial reporting: GPS coordinates of every tree, tonnes of CO₂, photo evidence, completion act." },
+      { "title": "Transparency", "text": "No \"purchased carbon credits\" — only real trees you can drive out and touch." }
+    ],
+    "ideal": "Who this is for",
+    "idealItems": [
+      "East-KZ industrial enterprises ready to publicly improve their footprint",
+      "SMBs — \"corporate forest\" packages from 50 trees",
+      "Retail chains running \"1 purchase = 1 tree\" programmes",
+      "Foreign offices in Kazakhstan that need a local ESG partner"
+    ],
+    "ctaTitle": "Discuss a corporate planting",
+    "ctaText": "We'll prepare a proposal and a draft contract within 3 business days.",
+    "ctaButton": "Contact us"
+  },
+  "diaspora": {
+    "title": "A root in your homeland — from anywhere in the world",
+    "subtitle": "For Kazakhstanis living in Almaty, Berlin, Istanbul, Moscow, London, Dubai. The tree stays here.",
+    "lead": "You moved away to study, to work, to build a life — that's normal. But the land that raised you is still here. Túbir plants a tree in your name in East Kazakhstan. Video to your inbox. Certificate to your address abroad. Coordinates — forever.",
+    "blocks": [
+      { "title": "Pay in your currency", "text": "USD or EUR through Stripe — no bank visit, no transfers via Kazpost." },
+      { "title": "Certificate with your name", "text": "A printed certificate to your address abroad — or a digital PDF with QR. Show your kids in 20 years." },
+      { "title": "Video from your steppe", "text": "Every spring report includes a short clip of \"how your plot looks now.\" So you remember how April smells in East Kazakhstan." },
+      { "title": "Family forest", "text": "All your family's trees on one map. Decades from now, descendants will find the ancestor's plot by surname." }
+    ],
+    "currencies": "Currencies available",
+    "currenciesNote": "USD · EUR · KZT — once the Stripe account is open. For now we work by request and invoice.",
+    "ctaTitle": "Plant a root from abroad",
+    "ctaText": "Send a request — we'll send an invoice in your currency and agree the planting date.",
+    "ctaButton": "Send request"
+  }
+}

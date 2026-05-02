@@ -37,6 +37,9 @@ yarn-error.log*
 # private contact memos
 HALYK_CONTACTS.md
 
+# local Claude Code settings (per-machine permissions list)
+.claude/settings.local.json
+
 # vercel
 .vercel
 

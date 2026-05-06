@@ -45,9 +45,20 @@ async function notify(payload: NotificationPayload) {
 }
 
 export async function notifyPlantRequest(data: PlantRequestInput) {
+  const safeData = {
+    name: data.name,
+    email: data.email,
+    phone: data.phone || null,
+    country: data.country || null,
+    species: data.species,
+    quantity: data.quantity,
+    dedication: data.dedication || null,
+    locale: data.locale,
+  };
+
   await notify({
     type: "plant_request",
-    title: "New Túbir tree request",
+    title: "New Tubir tree request",
     lines: [
       `Name: ${data.name}`,
       `Email: ${data.email}`,
@@ -57,20 +68,27 @@ export async function notifyPlantRequest(data: PlantRequestInput) {
       `Quantity: ${data.quantity}`,
       `Locale: ${data.locale}`,
     ],
-    data,
+    data: safeData,
   });
 }
 
 export async function notifyCallbackRequest(data: CallbackInput) {
+  const safeData = {
+    name: data.name,
+    phone: data.phone,
+    locale: data.locale,
+    source: data.source || null,
+  };
+
   await notify({
     type: "callback_request",
-    title: "New Túbir callback request",
+    title: "New Tubir callback request",
     lines: [
       `Name: ${data.name}`,
       `Phone: ${data.phone}`,
       `Locale: ${data.locale}`,
       `Source: ${data.source || "-"}`,
     ],
-    data,
+    data: safeData,
   });
 }

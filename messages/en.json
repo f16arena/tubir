@@ -159,6 +159,9 @@
       "validation": "Check the form fields and try again.",
       "spam": "The form was submitted too quickly. Refresh the page and try again.",
       "rate_limited": "Too many requests in a row. Try again in a few minutes.",
+      "turnstile": "Please complete the security check and try again.",
+      "turnstile_config": "The security check is not configured yet. Contact us directly.",
+      "security_config": "Secure submission is not configured yet. Contact us directly.",
       "db_schema": "The database is not ready yet: run the Supabase SQL migrations.",
       "db_policy": "Supabase rejected the insert because of an access policy. Check the RLS insert policy.",
       "db": "The database could not accept the request right now.",
@@ -322,6 +325,9 @@
         "validation": "Check the form fields and try again.",
         "spam": "The form was submitted too quickly. Refresh the page and try again.",
         "rate_limited": "Too many requests in a row. Try again in a few minutes.",
+        "turnstile": "Please complete the security check and try again.",
+        "turnstile_config": "The security check is not configured yet. Contact us directly.",
+        "security_config": "Secure submission is not configured yet. Contact us directly.",
         "db_schema": "The database is not ready yet: run the Supabase SQL migrations.",
         "db_relation": "The species or project catalogue is empty. Run seed.sql in Supabase.",
         "db_policy": "Supabase rejected the insert because of an access policy. Check the RLS insert policy.",
@@ -526,5 +532,67 @@
     "ctaTitle": "Plant a tree from abroad",
     "ctaText": "Send a request — we'll send an invoice in your currency and agree the planting date.",
     "ctaButton": "Send request"
+  },
+  "admin": {
+    "login": {
+      "eyebrow": "Admin",
+      "title": "Admin access",
+      "subtitle": "Enter an allowed email address. We will send a magic link for secure access.",
+      "email": "Email",
+      "emailPlaceholder": "admin@example.com",
+      "sendLink": "Send magic link",
+      "sending": "Sending...",
+      "sentTitle": "Check your inbox",
+      "sentText": "If this email is allowed, a login link has been sent.",
+      "errorTitle": "Could not send link",
+      "errors": {
+        "validation": "Enter a valid email address.",
+        "config": "Admin access is not configured yet. Set ADMIN_EMAILS.",
+        "auth": "Supabase Auth could not send the link right now."
+      }
+    },
+    "dashboard": {
+      "eyebrow": "Protected area",
+      "title": "Requests",
+      "signedInAs": "Signed in as {email}",
+      "signOut": "Sign out",
+      "configError": "Admin backend is not configured. Add SUPABASE_SERVICE_ROLE_KEY on the server.",
+      "loadError": "Could not load requests. Check Supabase migrations and permissions.",
+      "treeFilter": "Tree request status",
+      "callbackFilter": "Callback status",
+      "allStatuses": "All statuses",
+      "applyFilters": "Apply",
+      "treeRequests": "Tree requests",
+      "callbackRequests": "Callback requests",
+      "exportCsv": "Export CSV",
+      "noRequests": "No requests found.",
+      "email": "Email",
+      "phone": "Phone",
+      "species": "Species",
+      "quantity": "Quantity",
+      "country": "Country",
+      "locale": "Locale",
+      "dedication": "Dedication",
+      "source": "Source",
+      "updatedAt": "Updated",
+      "adminNote": "Admin note",
+      "save": "Save",
+      "statuses": {
+        "tree": {
+          "pending": "Pending",
+          "contacted": "Contacted",
+          "paid": "Paid",
+          "planted": "Planted",
+          "cancelled": "Cancelled"
+        },
+        "callback": {
+          "pending": "Pending",
+          "called": "Called",
+          "missed": "Missed",
+          "closed": "Closed",
+          "spam": "Spam"
+        }
+      }
+    }
   }
 }

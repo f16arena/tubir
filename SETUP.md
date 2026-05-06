@@ -35,9 +35,18 @@
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://abcdefghijkl.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIs...
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIs...
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4...
+TURNSTILE_SECRET_KEY=0x4...
+SUBMISSION_HASH_SALT=long-random-secret
+ADMIN_EMAILS=you@example.com
 ```
 
 Без кавычек. Без пробелов вокруг `=`.
+
+`SUPABASE_SERVICE_ROLE_KEY` хранится только на сервере/Vercel и никогда не должен иметь префикс `NEXT_PUBLIC_`.
+`SUBMISSION_HASH_SALT` сгенерируй как длинную случайную строку. `ADMIN_EMAILS` — список email администраторов через запятую.
+Turnstile-ключи создаются в Cloudflare Turnstile для домена `tubir.vercel.app` и будущего `tubir.kz`.
 
 **Перезапусти dev-сервер** после редактирования env:
 ```bash
@@ -62,6 +71,10 @@ npm run dev
 ### Миграция 2 — callback
 
 Открой `supabase/migrations/0002_callback.sql`, повтори процедуру.
+
+### Миграция 3 — безопасность и админка
+
+Открой `supabase/migrations/0003_security_admin.sql`, повтори процедуру. Она отключает прямую запись заявок через anon key, добавляет таблицу `submission_events`, поля для хэшей и админские заметки.
 
 ### Сид (стартовые данные)
 
@@ -153,7 +166,12 @@ npm run dev
 4. Раздел **Environment Variables** — добавь:
    - `NEXT_PUBLIC_SUPABASE_URL` = твой Supabase URL
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = твой anon key
+   - `SUPABASE_SERVICE_ROLE_KEY` = service role key, только server-side, без `NEXT_PUBLIC_`
    - `NEXT_PUBLIC_SITE_URL` = публичный адрес сайта, например `https://tubir.kz` или временно `https://tubir.vercel.app`
+   - `NEXT_PUBLIC_TURNSTILE_SITE_KEY` = публичный site key из Cloudflare Turnstile
+   - `TURNSTILE_SECRET_KEY` = секретный ключ Turnstile
+   - `SUBMISSION_HASH_SALT` = длинная случайная соль для хэшей IP/email/phone
+   - `ADMIN_EMAILS` = email администраторов через запятую
    - `TELEGRAM_BOT_TOKEN` = опционально, токен бота для уведомлений о заявках
    - `TELEGRAM_CHAT_ID` = опционально, chat id куда слать уведомления
    - `SUBMISSION_WEBHOOK_URL` = опционально, внешний webhook для CRM/Make/Zapier/почты
@@ -176,7 +194,7 @@ npm run dev
 После шагов 1–7 пройдись по списку:
 
 - [ ] `.env.local` заполнен реальными ключами Supabase
-- [ ] Все 3 миграции прогнаны без ошибок (`0001_init.sql`, `0002_callback.sql`, `seed.sql`)
+- [ ] Все миграции и сид прогнаны без ошибок (`0001_init.sql`, `0002_callback.sql`, `seed.sql`, `0003_security_admin.sql`)
 - [ ] В Table Editor видны 6 пород и 1 проект `vko_green`
 - [ ] Тестовая заявка через `/plant` попадает в `tree_requests`
 - [ ] Тестовый callback (плавающая кнопка с телефоном) попадает в `callback_requests`

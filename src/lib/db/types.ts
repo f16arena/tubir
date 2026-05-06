@@ -13,6 +13,8 @@ export type RequestStatus =
   | "planted"
   | "cancelled";
 
+export type CallbackStatus = "pending" | "called" | "missed" | "closed" | "spam";
+
 export type Species = {
   id: string;
   code: SpeciesCode;
@@ -41,5 +43,25 @@ export type TreeRequest = {
   project_code: string;
   status: RequestStatus;
   locale: string;
+  user_agent: string | null;
+  ip_hash: string | null;
+  identity_hash: string | null;
+  admin_note: string | null;
   created_at: string;
+  updated_at: string;
+};
+
+export type CallbackRequest = {
+  id: string;
+  name: string;
+  phone: string;
+  locale: string;
+  source_page: string | null;
+  status: CallbackStatus;
+  user_agent: string | null;
+  ip_hash: string | null;
+  identity_hash: string | null;
+  admin_note: string | null;
+  created_at: string;
+  updated_at: string;
 };

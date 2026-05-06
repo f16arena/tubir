@@ -20,6 +20,7 @@ export const plantRequestSchema = z.object({
   locale: z.string().trim().min(2).max(5),
   website: z.string().trim().max(200).optional().or(z.literal("")),
   startedAt: z.number().int().positive().optional(),
+  turnstileToken: z.string().trim().max(3000).optional().or(z.literal("")),
 });
 
 export type PlantRequestInput = z.infer<typeof plantRequestSchema>;

@@ -7,6 +7,7 @@ export const callbackSchema = z.object({
   source: z.string().trim().max(120).optional(),
   website: z.string().trim().max(200).optional().or(z.literal("")),
   startedAt: z.number().int().positive().optional(),
+  turnstileToken: z.string().trim().max(3000).optional().or(z.literal("")),
 });
 
 export type CallbackInput = z.infer<typeof callbackSchema>;

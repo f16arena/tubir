@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useCallback, useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
@@ -23,8 +23,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { TurnstileField } from "@/components/security/TurnstileField";
 
 type SpeciesCode = (typeof SPECIES_CODES)[number];
+
+function getStartedAt(): number {
+  return Date.now();
+}
 
 function getDefaultValues(locale: string, species: SpeciesCode): PlantRequestInput {
   return {
@@ -37,7 +42,8 @@ function getDefaultValues(locale: string, species: SpeciesCode): PlantRequestInp
     dedication: "",
     locale,
     website: "",
-    startedAt: Date.now(),
+    startedAt: undefined,
+    turnstileToken: "",
   };
 }
 
@@ -72,11 +78,28 @@ export function PlantForm() {
 
   const [isPending, startTransition] = useTransition();
   const [done, setDone] = useState(false);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   function resetForm() {
     setSpeciesValue(initialSpecies);
     reset(getDefaultValues(locale, initialSpecies));
+    setValue("startedAt", getStartedAt(), { shouldDirty: false });
+    setTurnstileResetKey((key) => key + 1);
   }
+
+  useEffect(() => {
+    setValue("startedAt", getStartedAt(), { shouldDirty: false });
+  }, [setValue]);
+
+  const handleTurnstileToken = useCallback(
+    (token: string) => {
+      setValue("turnstileToken", token, {
+        shouldDirty: true,
+        shouldValidate: false,
+      });
+    },
+    [setValue],
+  );
 
   function getErrorText(error: Exclude<PlantActionResult, { ok: true }>["error"]) {
     return t(`errors.${error}`);
@@ -91,6 +114,7 @@ export function PlantForm() {
         setDone(true);
       } else {
         toast.error(t("errorTitle"), { description: getErrorText(res.error) });
+        setTurnstileResetKey((key) => key + 1);
       }
     });
   };
@@ -124,6 +148,7 @@ export function PlantForm() {
         />
       </div>
       <input type="hidden" {...register("startedAt", { valueAsNumber: true })} />
+      <input type="hidden" {...register("turnstileToken")} />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
@@ -216,6 +241,12 @@ export function PlantForm() {
         />
         {errors.dedication ? <FieldError>{t("fieldInvalid")}</FieldError> : null}
       </div>
+
+      <TurnstileField
+        action="plant"
+        resetKey={turnstileResetKey}
+        onToken={handleTurnstileToken}
+      />
 
       <Button type="submit" disabled={isPending} className="w-full sm:w-auto">
         {isPending ? t("submitting") : t("submit")}

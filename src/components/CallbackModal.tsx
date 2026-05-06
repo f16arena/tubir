@@ -11,17 +11,23 @@ import { submitCallback, type CallbackResult } from "@/lib/actions/callback";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { TurnstileField } from "@/components/security/TurnstileField";
 
 type Props = { open: boolean; onClose: () => void };
+
+function getStartedAt(): number {
+  return Date.now();
+}
 
 function getDefaultValues(locale: string): CallbackInput {
   return {
     name: "",
     phone: "",
     locale,
-    source: typeof window !== "undefined" ? window.location.pathname : "",
+    source: "",
     website: "",
-    startedAt: Date.now(),
+    startedAt: undefined,
+    turnstileToken: "",
   };
 }
 
@@ -34,6 +40,7 @@ export function CallbackModal({ open, onClose }: Props) {
   const locale = useLocale();
   const [isPending, startTransition] = useTransition();
   const [done, setDone] = useState(false);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const nameRef = useRef<HTMLInputElement | null>(null);
 
   const {
@@ -41,12 +48,23 @@ export function CallbackModal({ open, onClose }: Props) {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<CallbackInput>({
     resolver: zodResolver(callbackSchema),
     defaultValues: getDefaultValues(locale),
   });
 
   const nameRegistration = register("name");
+
+  const handleTurnstileToken = useCallback(
+    (token: string) => {
+      setValue("turnstileToken", token, {
+        shouldDirty: true,
+        shouldValidate: false,
+      });
+    },
+    [setValue],
+  );
 
   const handleClose = useCallback(() => {
     setDone(false);
@@ -72,9 +90,11 @@ export function CallbackModal({ open, onClose }: Props) {
   useEffect(() => {
     if (!open) return;
     reset(getDefaultValues(locale));
+    setValue("source", window.location.pathname, { shouldDirty: false });
+    setValue("startedAt", getStartedAt(), { shouldDirty: false });
     const timer = window.setTimeout(() => nameRef.current?.focus(), 0);
     return () => window.clearTimeout(timer);
-  }, [open, locale, reset]);
+  }, [open, locale, reset, setValue]);
 
   if (!open) return null;
 
@@ -84,8 +104,10 @@ export function CallbackModal({ open, onClose }: Props) {
       if (res.ok) {
         toast.success(t("successTitle"), { description: t("successText") });
         setDone(true);
+        setTurnstileResetKey((key) => key + 1);
       } else {
         toast.error(t("errorTitle"), { description: getErrorText(res.error) });
+        setTurnstileResetKey((key) => key + 1);
       }
     });
   };
@@ -132,6 +154,8 @@ export function CallbackModal({ open, onClose }: Props) {
                 />
               </div>
               <input type="hidden" {...register("startedAt", { valueAsNumber: true })} />
+              <input type="hidden" {...register("source")} />
+              <input type="hidden" {...register("turnstileToken")} />
 
               <div className="space-y-1.5">
                 <Label htmlFor="cb-name">{t("name")}</Label>
@@ -158,6 +182,11 @@ export function CallbackModal({ open, onClose }: Props) {
                 />
                 {errors.phone ? <FieldError>{t("phoneInvalid")}</FieldError> : null}
               </div>
+              <TurnstileField
+                action="callback"
+                resetKey={turnstileResetKey}
+                onToken={handleTurnstileToken}
+              />
               <Button type="submit" disabled={isPending} className="w-full">
                 {isPending ? t("submitting") : t("submit")}
               </Button>

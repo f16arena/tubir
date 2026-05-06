@@ -1,14 +1,19 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { plantRequestSchema, type PlantRequestInput } from "@/lib/validation/plant";
 import { notifyPlantRequest } from "@/lib/notifications";
 import { checkSubmissionGuard } from "@/lib/security/submissions";
+import { getSubmissionRequestContext } from "@/lib/security/request-context";
+import { verifyTurnstileToken } from "@/lib/security/turnstile";
 
 export type PlantActionError =
   | "validation"
   | "spam"
   | "rate_limited"
+  | "turnstile"
+  | "turnstile_config"
+  | "security_config"
   | "db_schema"
   | "db_relation"
   | "db_policy"
@@ -22,6 +27,13 @@ export type PlantActionResult =
 function isPlaceholderEnv(): boolean {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
   return !url || url.includes("your-project") || url.includes("example");
+}
+
+function shouldBypassBackendInDev(): boolean {
+  return (
+    process.env.NODE_ENV !== "production" &&
+    (isPlaceholderEnv() || !process.env.SUPABASE_SERVICE_ROLE_KEY)
+  );
 }
 
 function mapSupabaseError(error: { code?: string; message?: string }): PlantActionError {
@@ -45,26 +57,37 @@ export async function submitPlantRequest(
     return { ok: false, error: "validation" };
   }
   const data = parsed.data;
+  const context = await getSubmissionRequestContext();
 
-  const guard = checkSubmissionGuard({
-    bucket: "plant",
-    identity: data.email,
-    honeypot: data.website,
-    startedAt: data.startedAt,
-    maxAttempts: 3,
-  });
-  if (!guard.ok) {
-    return { ok: false, error: guard.error };
+  const turnstile = await verifyTurnstileToken(data.turnstileToken, context.ip);
+  if (!turnstile.ok) {
+    return { ok: false, error: turnstile.error };
   }
 
-  // Dev mode: env not configured yet — log and treat as success for UI testing.
-  if (isPlaceholderEnv()) {
-    console.log("[plant] dev-mode submission (no Supabase configured):", data);
+  if (shouldBypassBackendInDev()) {
+    console.log("[plant] dev-mode submission (no Supabase admin configured):", {
+      ...data,
+      turnstileToken: data.turnstileToken ? "[present]" : "",
+    });
     return { ok: true };
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
+    const guard = await checkSubmissionGuard({
+      supabase,
+      bucket: "plant",
+      identity: data.email,
+      ip: context.ip,
+      userAgent: context.userAgent,
+      honeypot: data.website,
+      startedAt: data.startedAt,
+      maxAttempts: 3,
+    });
+    if (!guard.ok) {
+      return { ok: false, error: guard.error };
+    }
+
     const { error } = await supabase.from("tree_requests").insert({
       name: data.name,
       email: data.email,
@@ -76,6 +99,9 @@ export async function submitPlantRequest(
       project_code: "vko_green",
       status: "pending",
       locale: data.locale,
+      user_agent: context.userAgent,
+      ip_hash: guard.ipHash,
+      identity_hash: guard.identityHash,
     });
     if (error) {
       console.error("[plant] supabase insert error:", error);
@@ -85,6 +111,6 @@ export async function submitPlantRequest(
     return { ok: true };
   } catch (err) {
     console.error("[plant] unexpected error:", err);
-    return { ok: false, error: "unknown" };
+    return { ok: false, error: "security_config" };
   }
 }

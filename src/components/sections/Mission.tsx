@@ -1,43 +1,62 @@
 import { useTranslations } from "next-intl";
-import { Heart, Wind, Atom } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Reveal } from "@/components/Reveal";
-
-const icons = [Heart, Wind, Atom] as const;
+import { Reveal } from "@/components/motion/Reveal";
+import { RootDraw } from "@/components/motion/RootDraw";
 
 export function Mission() {
   const t = useTranslations("mission");
   const items = t.raw("items") as Array<{ title: string; text: string }>;
 
   return (
-    <section className="border-t border-border/60 bg-muted/20">
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <Reveal>
-          <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight sm:text-4xl">
-            {t("title")}
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {items.map((item, i) => {
-            const Icon = icons[i] ?? Heart;
-            return (
-              <Reveal key={i} delay={i * 100}>
-                <Card className="h-full border-border/60 transition-shadow hover:shadow-md">
-                  <CardContent className="p-6">
-                    <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="text-lg font-semibold">{item.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                      {item.text}
-                    </p>
-                  </CardContent>
-                </Card>
+    <section className="relative border-t border-border/60 bg-background">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8">
+        {/* Section header */}
+        <div className="grid gap-8 pt-24 pb-10 sm:pt-32 sm:pb-14 md:grid-cols-12">
+          <Reveal className="md:col-span-3">
+            <div className="editorial-kicker text-muted-foreground">
+              I · Зачем
+            </div>
+          </Reveal>
+          <Reveal className="md:col-span-9" delay={120}>
+            <h2 className="text-display text-balance text-[clamp(2.2rem,5vw,4.5rem)]">
+              {t("title")}
+            </h2>
+          </Reveal>
+        </div>
+
+        <div className="h-px w-full editorial-rule bg-foreground" />
+
+        {/* Three editorial blocks */}
+        <div className="divide-y divide-border/60">
+          {items.map((item, i) => (
+            <article
+              key={item.title}
+              className="grid gap-8 py-16 sm:py-24 md:grid-cols-12 md:gap-10"
+            >
+              <Reveal className="md:col-span-3" delay={i * 60}>
+                <div className="flex items-baseline gap-4 md:flex-col md:items-start">
+                  <span className="num-lockup nums-tabular text-[5rem] leading-none text-primary sm:text-[6rem]">
+                    0{i + 1}
+                  </span>
+                  <div className="text-serif-italic text-xl text-foreground/85 sm:text-2xl">
+                    {item.title}
+                  </div>
+                </div>
               </Reveal>
-            );
-          })}
+              <Reveal className="md:col-span-9" delay={i * 60 + 120}>
+                <p className="drop-cap text-pretty text-[1.05rem] leading-[1.75] text-foreground/85 sm:text-lg md:max-w-[58ch]">
+                  {item.text}
+                </p>
+              </Reveal>
+            </article>
+          ))}
         </div>
       </div>
+
+      <RootDraw
+        className="-mt-2 mb-2 text-primary/40"
+        height={140}
+        width={80}
+      />
     </section>
   );
 }

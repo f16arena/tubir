@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingChat } from "@/components/layout/FloatingChat";
 import { CookiesBanner } from "@/components/CookiesBanner";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { Toaster } from "@/components/ui/sonner";
 import { getOgLocale, getSiteUrl, siteName } from "@/lib/seo";
 import "../globals.css";
@@ -87,6 +88,7 @@ export default async function LocaleLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <NextIntlClientProvider>
           <Header />
+          <ScrollProgress />
           <main className="flex-1">{children}</main>
           <Footer />
           <FloatingChat />

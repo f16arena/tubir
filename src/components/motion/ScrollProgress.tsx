@@ -33,7 +33,7 @@ export function ScrollProgress() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed left-0 right-0 top-16 z-30 h-px bg-transparent"
+      className="pointer-events-none fixed left-0 right-0 top-16 z-30 h-px bg-transparent print-hide"
     >
       <div
         ref={ref}

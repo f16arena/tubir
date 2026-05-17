@@ -30,7 +30,7 @@ export function CookiesBanner() {
   }
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-40 sm:inset-x-auto sm:right-5 sm:max-w-md">
+    <div data-cookies-banner className="fixed inset-x-3 bottom-3 z-40 print-hide sm:inset-x-auto sm:right-5 sm:max-w-md">
       <div className="rounded-2xl border border-border bg-background/95 p-4 shadow-2xl backdrop-blur-md">
         <p className="text-sm text-foreground/90">{t("text")}</p>
         <div className="mt-3 flex items-center justify-end gap-3">

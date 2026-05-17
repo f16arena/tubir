@@ -75,7 +75,7 @@ export async function Honest() {
 
               <MagneticButton>
                 <Link
-                  href="/plant"
+                  href="/pledge"
                   className={cn(
                     buttonVariants({ size: "lg" }),
                     "group h-12 rounded-full px-7 text-base",

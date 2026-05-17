@@ -3,7 +3,7 @@ import "server-only";
 import { createHash } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-type SubmissionBucket = "plant" | "callback";
+type SubmissionBucket = "plant" | "callback" | "pledge";
 
 type SubmissionGuardInput = {
   supabase: SupabaseClient;

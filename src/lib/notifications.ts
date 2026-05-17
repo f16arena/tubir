@@ -1,8 +1,9 @@
 import type { PlantRequestInput } from "@/lib/validation/plant";
 import type { CallbackInput } from "@/lib/validation/callback";
+import type { PledgeInput } from "@/lib/validation/pledge";
 
 type NotificationPayload = {
-  type: "plant_request" | "callback_request";
+  type: "plant_request" | "callback_request" | "pledge";
   title: string;
   lines: string[];
   data: Record<string, unknown>;
@@ -67,6 +68,29 @@ export async function notifyPlantRequest(data: PlantRequestInput) {
       `Species: ${data.species}`,
       `Quantity: ${data.quantity}`,
       `Locale: ${data.locale}`,
+    ],
+    data: safeData,
+  });
+}
+
+export async function notifyPledge(data: PledgeInput) {
+  const safeData = {
+    name: data.name,
+    email: data.email,
+    species: data.speciesCode || null,
+    locale: data.locale,
+    source: data.source || null,
+  };
+
+  await notify({
+    type: "pledge",
+    title: "New Tubir Founders Circle pledge",
+    lines: [
+      `Name: ${data.name}`,
+      `Email: ${data.email}`,
+      `Species: ${data.speciesCode || "-"}`,
+      `Locale: ${data.locale}`,
+      `Source: ${data.source || "-"}`,
     ],
     data: safeData,
   });

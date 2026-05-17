@@ -7,7 +7,17 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { Parallax } from "@/components/motion/Parallax";
+import { CountUp } from "@/components/motion/CountUp";
 import { photos } from "@/lib/data/gallery";
+
+type TimelineEntry = { year: string; event: string };
+type PolygonStat = {
+  value: string;
+  unit?: string;
+  label: string;
+  source: string;
+  sourceUrl?: string;
+};
 
 export default async function PolygonPage({
   params,
@@ -18,6 +28,8 @@ export default async function PolygonPage({
   setRequestLocale(locale);
   const t = await getTranslations("polygon");
   const blocks = t.raw("blocks") as Array<{ title: string; text: string }>;
+  const timeline = (t.raw("timeline") as TimelineEntry[] | undefined) ?? [];
+  const stats = (t.raw("stats") as PolygonStat[] | undefined) ?? [];
 
   return (
     <>
@@ -64,6 +76,92 @@ export default async function PolygonPage({
           </p>
         </Reveal>
       </section>
+
+      {timeline.length > 0 ? (
+        <section className="mx-auto mt-20 max-w-7xl px-4 sm:mt-28 sm:px-8">
+          <div className="grid gap-8 md:grid-cols-12">
+            <Reveal className="md:col-span-3">
+              <div className="editorial-kicker text-muted-foreground">
+                {t("timelineKicker")}
+              </div>
+              <h2 className="text-display mt-3 text-balance text-2xl leading-tight sm:text-3xl">
+                {t("timelineTitle")}
+              </h2>
+            </Reveal>
+            <ol className="md:col-span-9">
+              <div className="border-t border-border/70">
+                {timeline.map((e, i) => (
+                  <Reveal key={e.year + i} delay={i * 40}>
+                    <li className="grid items-baseline gap-6 border-b border-border/60 py-5 md:grid-cols-[8rem_1fr]">
+                      <span className="num-lockup nums-tabular text-3xl text-primary sm:text-4xl">
+                        {e.year}
+                      </span>
+                      <span className="text-pretty text-base leading-[1.6] text-foreground/85 sm:text-lg">
+                        {e.event}
+                      </span>
+                    </li>
+                  </Reveal>
+                ))}
+              </div>
+            </ol>
+          </div>
+        </section>
+      ) : null}
+
+      {stats.length > 0 ? (
+        <section className="mx-auto mt-20 max-w-7xl px-4 sm:mt-28 sm:px-8">
+          <div className="grid gap-8 md:grid-cols-12">
+            <Reveal className="md:col-span-3">
+              <div className="editorial-kicker text-muted-foreground">
+                {t("statsKicker")}
+              </div>
+              <h2 className="text-display mt-3 text-balance text-2xl leading-tight sm:text-3xl">
+                {t("statsTitle")}
+              </h2>
+            </Reveal>
+            <dl className="md:col-span-9">
+              <div className="border-t border-border/70">
+                {stats.map((s, i) => (
+                  <Reveal key={s.label + i} delay={i * 60}>
+                    <div className="grid items-baseline gap-4 border-b border-border/60 py-7 md:grid-cols-[12rem_1fr_auto] md:gap-8">
+                      <dt>
+                        <div className="num-lockup nums-tabular text-4xl text-foreground sm:text-5xl">
+                          <CountUp value={s.value} duration={1500} />
+                          {s.unit ? (
+                            <span className="ml-1 text-2xl text-foreground/60 sm:text-3xl">
+                              {s.unit}
+                            </span>
+                          ) : null}
+                        </div>
+                      </dt>
+                      <dd className="max-w-prose text-pretty text-base leading-[1.6] text-foreground/85 sm:text-lg">
+                        {s.label}
+                      </dd>
+                      <div className="max-w-[12rem] text-xs text-muted-foreground">
+                        <div className="editorial-kicker mb-1 text-muted-foreground">
+                          {t("source")}
+                        </div>
+                        {s.sourceUrl ? (
+                          <a
+                            href={s.sourceUrl}
+                            target="_blank"
+                            rel="noopener nofollow"
+                            className="text-serif-italic ink-underline"
+                          >
+                            {s.source}
+                          </a>
+                        ) : (
+                          <span className="text-serif-italic">{s.source}</span>
+                        )}
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </dl>
+          </div>
+        </section>
+      ) : null}
 
       <section className="mx-auto mt-20 grid max-w-7xl gap-8 px-4 sm:mt-28 sm:px-8 md:grid-cols-12">
         <Reveal className="md:col-span-3">

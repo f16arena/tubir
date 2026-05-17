@@ -123,6 +123,13 @@
     "refundLink": "Refund policy",
     "company": "Túbir LLP — registration in progress. BIN, bank details, and online payment terms will be published after incorporation. Until then, we work by request and invoice.",
     "extras": "More",
+    "letterLink": "Letter",
+    "teamLink": "Team",
+    "pressLink": "Press kit",
+    "numbersLink": "Numbers",
+    "mapLink": "Map",
+    "partnersLink": "Partners",
+    "pledgeLink": "Founders",
     "roadmapLink": "Roadmap",
     "businessLink": "For business",
     "diasporaLink": "For diaspora",
@@ -425,7 +432,28 @@
     "statusLabel": "Status",
     "statusValue": "Concept. Partnership in development. Launch — 2027.",
     "cta": "I want to join",
-    "ctaText": "Send a request — we'll let you know when the project opens. Affected families and aligned organisations — first in line."
+    "ctaText": "Send a request — we'll let you know when the project opens. Affected families and aligned organisations — first in line.",
+    "timelineKicker": "Timeline",
+    "timelineTitle": "40 years of testing, and what comes after",
+    "source": "Source",
+    "statsKicker": "Numbers",
+    "statsTitle": "What the land inherited",
+    "timeline": [
+      { "year": "1949", "event": "First Soviet nuclear test at the Semipalatinsk Polygon." },
+      { "year": "1953", "event": "Thermonuclear device test (RDS-6s)." },
+      { "year": "1963", "event": "Partial Test Ban Treaty signed. Many tests move underground." },
+      { "year": "1989", "event": "«Nevada–Semipalatinsk» mass movement against testing." },
+      { "year": "1991", "event": "Decree closing the test site. The last blast was October 1989." },
+      { "year": "1992", "event": "Law on social protection of those affected by nuclear testing." },
+      { "year": "2007", "event": "Site placed under National Nuclear Centre stewardship; long-term ecological monitoring." },
+      { "year": "2026", "event": "Túbir — the Polygon Atonement Forest concept. Partnership with the NNC in development." }
+    ],
+    "stats": [
+      { "value": "456", "label": "Nuclear tests on the polygon between 1949 and 1989", "source": "National Nuclear Centre RK", "sourceUrl": "https://www.nnc.kz/" },
+      { "value": "304 000", "unit": "km²", "label": "Area under the radioactive trail", "source": "UNDP Kazakhstan", "sourceUrl": "https://www.undp.org/kazakhstan" },
+      { "value": "1.7", "unit": "M", "label": "People in the zone of impact over 40 years", "source": "RK parliamentary hearings, open data" },
+      { "value": "18 500", "unit": "km²", "label": "Area of the polygon itself", "source": "NNC RK", "sourceUrl": "https://www.nnc.kz/" }
+    ]
   },
   "atameken": {
     "label": "Special project",
@@ -494,7 +522,14 @@
       { "label": "Q2 2027", "title": "5,000 trees and B2B channel", "text": "Corporate stream for East-KZ enterprises. ESG reports, corporate planting days.", "status": "planned" },
       { "label": "2027 and onwards", "title": "Goal — 100,000 trees", "text": "Expansion into new sites in Abai region. \"Coming-of-age tree\" programme in East-KZ schools. A forest with names.", "status": "vision" }
     ],
-    "honestNote": "This isn't a marketing plan — it's what we genuinely intend to do. If anything shifts, we'll update publicly."
+    "honestNote": "This isn't a marketing plan — it's what we genuinely intend to do. If anything shifts, we'll update publicly.",
+    "devlogKicker": "Devlog · public log",
+    "devlogNote": "Once a month — a short note on real progress. If a month is empty, we'll say so.",
+    "stagesKicker": "Plan phases",
+    "devlog": [
+      { "date": "18.05.2026", "title": "Public devlog launched", "body": "From now on, a short monthly note on real progress. Today: site updated, Founders Circle opens, ongoing exchange with the Halyk Orman fund, drafting an application to the Presidential Nature Fund.", "location": "Öskemen" },
+      { "date": "30.04.2026", "title": "Concept and site", "body": "Mission and identity fixed. Trilingual site launched. First public roadmap published. Legal-entity registration in progress.", "location": "Öskemen" }
+    ]
   },
   "business": {
     "title": "Túbir for business",
@@ -532,6 +567,268 @@
     "ctaTitle": "Plant a tree from abroad",
     "ctaText": "Send a request — we'll send an invoice in your currency and agree the planting date.",
     "ctaButton": "Send request"
+  },
+  "letter": {
+    "eyebrow": "Letter · 18 May 2026",
+    "title": "A letter to the first person who says yes.",
+    "lead": "Not a press release. Not marketing. A short text for anyone who's thinking about planting a tree with us but hasn't decided yet.",
+    "metaLabel": "Author",
+    "metaAuthor": "The Túbir team",
+    "metaLocation": "Öskemen · East Kazakhstan",
+    "metaDate": "18 May 2026",
+    "paragraphs": [
+      { "title": "Where we start", "body": "Túbir is a startup. We have not yet planted a single tree. There is no registered company, no plot, no video of a shovel entering the ground. There is an idea, a team, and a plan for the year ahead." },
+      { "title": "Why we write now", "body": "Most sites like ours don't write letters like this. They pick the version of events where everything already works. We choose the other one — to say things as they are and ask for trust now, before we have proved anything." },
+      { "title": "Why East Kazakhstan", "body": "Because we're from here. When we say «this land remembers the factories and the test site» — we remember with it. This is not a marketing formula. It's the address where our parents live." },
+      { "title": "What we promise", "body": "Real trees. A video of every planting. GPS coordinates. Three years of care after planting. If a tree doesn't take, we plant a new one at our own cost." },
+      { "title": "What we don't promise", "body": "That everything will go smoothly. That the first season will work out the first try. That we'll find the perfect plot in a month. That our certificates will look better than those of teams who've been at this for three years." },
+      { "title": "What we ask", "body": "We don't need a hundred thousand people today. We need the first hundred. People who'll say «I want to be first» before we've planted a single tree. These hundred are the Founders. Their trees go into the very first batch, their names go on the stele at the plot." }
+    ],
+    "signatureName": "The Túbir team",
+    "signatureMeta": "Öskemen · 18 May 2026",
+    "ctaKicker": "If this lands",
+    "ctaTitle": "Leave a name and an email.",
+    "ctaText": "No newsletter, no nudges — just one letter, when the first shovel hits the ground.",
+    "ctaButton": "Become a Founder"
+  },
+  "team": {
+    "kicker": "Team",
+    "title": "Who's behind this",
+    "subtitle": "Names and faces. Transparency beats a polished About page.",
+    "photoNote": "Real photo — after the first planting",
+    "founders": [
+      { "name": "Founder", "role": "Founder · Strategy and operations", "bio": "From East Kazakhstan. IT by profession; this project by conviction. A full bio will appear here after the legal entity is registered — a matter of paperwork, not of hiding." }
+    ],
+    "advisorsKicker": "Advisory",
+    "advisorsTitle": "We're looking for advisors",
+    "advisorsLead": "Three open seats for people whose name adds weight — an ecologist, a regional historian, a lawyer with land or ESG experience.",
+    "advisorSlots": [
+      { "discipline": "East Kazakhstan ecology", "note": "A scientist or practitioner with public work on reforestation or regional air quality." },
+      { "discipline": "Regional history", "note": "A researcher of the test site, the ribbon pine forest, the region's industrial legacy. Context matters." },
+      { "discipline": "Land law / ESG", "note": "A lawyer or consultant who understands licensing, ESG reporting, and working with regional government." }
+    ],
+    "openSlot": "open seat",
+    "joinKicker": "Join",
+    "joinTitle": "If this is you",
+    "joinText": "Write a short note: who you are, why the project speaks to you, how much time you'd put in. One page is enough.",
+    "joinButton": "Write to us",
+    "readLetter": "Read the letter first"
+  },
+  "press": {
+    "kicker": "Press kit",
+    "title": "Túbir for journalists",
+    "subtitle": "Quotes, facts, assets — everything you need for a story.",
+    "lead": "Túbir is a reforestation project in East Kazakhstan, currently preparing its first batch of plantings. This page collects what you can quote and use without checking with us.",
+    "factsKicker": "Key facts",
+    "facts": [
+      { "k": "What it is", "v": "An online service for planting real trees in East Kazakhstan, with video reports" },
+      { "k": "Where", "v": "East Kazakhstan Region, Republic of Kazakhstan" },
+      { "k": "Languages", "v": "Russian · Қазақша · English" },
+      { "k": "Launch", "v": "Concept — Q2 2026, first batch — Q4 2026" },
+      { "k": "Goal", "v": "100,000 living trees by 2030" },
+      { "k": "Under", "v": "Taza Qazaqstan national concept (2024–2029)" },
+      { "k": "Flagships", "v": "Polygon Atonement Forest · Family Forest" }
+    ],
+    "quotesKicker": "Ready-to-cite quotes",
+    "quotesNote": "Free to cite verbatim. Please credit «Túbir» / tubir.kz.",
+    "quotes": [
+      "One man, one root. Túbir is an attempt to move a physical duty from the unreachable into a single click — without deceit and without the virtual.",
+      "East Kazakhstan spent decades giving the country metals, uranium, and weapons. And all that time it gave up its air, its water, its forests. Túbir is putting something back. One tree at a time.",
+      "We have not planted a single tree yet. We write about that openly, because we don't want to build a project on a pretty version of events in which everything already works."
+    ],
+    "assetsKicker": "Brand",
+    "assetsTitle": "Logo, colours, type",
+    "logoWord": "Wordmark",
+    "onePagerKicker": "Concept · A4",
+    "onePagerTitle": "Download the one-pager",
+    "onePagerText": "A print-ready A4 version of the concept — for sending to a regional administration, a partner, or an editor. Open it and save as PDF from your browser.",
+    "onePagerOpen": "Open one-pager",
+    "onePagerPrint": "Print / PDF",
+    "contactKicker": "Contact",
+    "contactTitle": "For interviews and quick questions",
+    "contactText": "Email us — we reply within a working day. For urgent — WhatsApp."
+  },
+  "numbers": {
+    "kicker": "Open numbers",
+    "title": "Numbers with sources",
+    "subtitle": "So debates can be about meaning, not facts.",
+    "lead": "We collect here the numbers we cite in everything we write about the project — about East Kazakhstan, the test site, and the national programmes. Each one links to its primary source.",
+    "blockMeta": "Block",
+    "source": "Source",
+    "disclaimer": "If you see an outdated figure or a mistake, write to us. These numbers are the basis of every public statement we make.",
+    "blocks": [
+      {
+        "title": "East Kazakhstan · air",
+        "stats": [
+          { "value": "83 000", "unit": "t/year", "label": "Estimated annual volume of harmful emissions in the East Kazakhstan Region", "source": "Bureau of National Statistics RK", "sourceUrl": "https://stat.gov.kz/" },
+          { "value": "5", "label": "East Kazakhstan consistently ranks in the top five most polluted regions in the country by air-quality index", "source": "Kazhydromet", "sourceUrl": "https://www.kazhydromet.kz/" }
+        ]
+      },
+      {
+        "title": "Semipalatinsk test site",
+        "stats": [
+          { "value": "456", "label": "Nuclear tests on the site between 1949 and 1989", "source": "National Nuclear Centre RK", "sourceUrl": "https://www.nnc.kz/" },
+          { "value": "304 000", "unit": "km²", "label": "Area affected by the radioactive trail of the tests", "source": "UNDP Kazakhstan report", "sourceUrl": "https://www.undp.org/kazakhstan" },
+          { "value": "1.7", "unit": "M", "label": "People in the zone of impact over 40 years of testing", "source": "RK parliamentary hearings, open data" }
+        ]
+      },
+      {
+        "title": "Taza Qazaqstan · programme",
+        "stats": [
+          { "value": "5.5", "unit": "M", "label": "Trees planted across the country in the first two years of the programme", "source": "Ministry of Ecology RK", "sourceUrl": "https://www.gov.kz/memleket/entities/ecogeo" },
+          { "value": "2024", "unit": "—2029", "label": "Time horizon of the Taza Qazaqstan concept", "source": "Presidential Decree RK" }
+        ]
+      }
+    ]
+  },
+  "partners": {
+    "kicker": "Partnership",
+    "title": "Who we work with",
+    "subtitle": "Three streams: business, government, grants. Each with its own door.",
+    "lead": "Túbir is a private initiative, but we're open to partnerships. If your work overlaps with our mission, there's an entrance built for you.",
+    "idealKicker": "Best fit",
+    "writeUs": "Write",
+    "seeMore": "Read more",
+    "streams": [
+      {
+        "key": "b2b",
+        "number": "01",
+        "audience": "B2B · business",
+        "title": "Corporate planting and ESG",
+        "text": "If you operate in East Kazakhstan and care about your environmental footprint — we offer real trees you can visit and touch, not carbon credits. With GPS, ESG reports, and photo/video records.",
+        "ideal": [
+          "Industrial enterprises in East Kazakhstan (metals, energy, construction)",
+          "Mid-sized businesses with «one purchase, one tree» programmes",
+          "Foreign representative offices needing a local ESG partner",
+          "Retail networks — corporate planting days"
+        ],
+        "ctaTitle": "Talk about a corporate planting",
+        "ctaText": "We'll prepare a commercial proposal and a contract outline within three business days.",
+        "contactSubject": "Túbir · B2B · ESG",
+        "linkTo": "/business",
+        "linkLabel": "Full proposal"
+      },
+      {
+        "key": "b2g",
+        "number": "02",
+        "audience": "B2G · state",
+        "title": "Akimat, ministries, funds",
+        "text": "Túbir operates under the Taza Qazaqstan concept. We're open to coordinated plots, planting protocols, joint programmes with East Kazakhstan schools and national funds. Documentation and concept fit on one page.",
+        "ideal": [
+          "East Kazakhstan Natural Resources Department",
+          "Ministry of Ecology — Green Kazakhstan programme",
+          "Halyk Orman fund — saplings and plot coordination",
+          "GEF/UNDP small grants programme in Kazakhstan"
+        ],
+        "ctaTitle": "Request the concept",
+        "ctaText": "We'll send the A4 one-pager with mission, numbers, and contacts. Full documentation follows once the legal entity is registered.",
+        "contactSubject": "Túbir · B2G",
+        "linkTo": "/press/one-pager",
+        "linkLabel": "A4 one-pager"
+      },
+      {
+        "key": "grants",
+        "number": "03",
+        "audience": "NGO · grants · academia",
+        "title": "Grants and research",
+        "text": "The Polygon Atonement Forest and the Family Forest aren't only plantings — they're research projects with historical, ecological, and cultural context. We're open to joint grant applications and academic collaborations.",
+        "ideal": [
+          "Presidential Nature Fund of Kazakhstan",
+          "GEF / UNDP small grants programme",
+          "Researchers from Amanzholov University and the National Nuclear Centre",
+          "International eco-funds and cultural institutions"
+        ],
+        "ctaTitle": "Propose a collaboration",
+        "ctaText": "Tell us briefly: organisation, focus, format of cooperation. We reply within five business days.",
+        "contactSubject": "Túbir · grant",
+        "linkTo": "/projects/polygon",
+        "linkLabel": "Flagship project"
+      }
+    ]
+  },
+  "pledge": {
+    "kicker": "Founders Circle",
+    "title": "Be one of the first 100",
+    "subtitle": "Seats reserved before the first planting. A named stele and a «Founder · 0NN» certificate.",
+    "counterKicker": "Reserved",
+    "counterOf": "of",
+    "counterRemaining": "{n} left",
+    "counterFull": "all seats taken",
+    "perksKicker": "What the first 100 get",
+    "perks": [
+      "A named «Founder · 0NN» certificate with your reservation number",
+      "Your name on the stele at the project plot in East Kazakhstan",
+      "A tree from the very first planting batch",
+      "A letter from the team when the first shovel hits the ground"
+    ],
+    "note": "This is a reservation, not a payment. Once the legal entity is in place, we'll send an invoice for the species you choose. Change your mind? No questions asked.",
+    "name": "Name",
+    "namePh": "Your name",
+    "email": "Email",
+    "emailPh": "you@example.com",
+    "submit": "Reserve a seat",
+    "submitting": "Reserving...",
+    "successTitle": "You're in.",
+    "successText": "You're among the Founders. When the first shovel hits the ground — you'll be the first to hear.",
+    "errorTitle": "Couldn't submit",
+    "fieldRequired": "Please fill this in.",
+    "emailInvalid": "Enter a valid email.",
+    "disclaimer": "No newsletter. Just one letter — when the first planting happens.",
+    "errors": {
+      "validation": "Please check the form and try again.",
+      "spam": "Submitted too quickly. Refresh and try again.",
+      "rate_limited": "Too many submissions. Try again in a few minutes.",
+      "turnstile": "Please complete the security check.",
+      "turnstile_config": "Security check isn't configured yet. Write to us directly.",
+      "security_config": "Submission backend isn't configured. Write to us directly.",
+      "db_schema": "Database isn't ready. Run the latest SQL migrations.",
+      "db_policy": "Supabase declined the insert (RLS policy).",
+      "db_duplicate": "This email is already on the Founders list.",
+      "db": "The database refused the request.",
+      "unknown": "Something unexpected happened. Write to us directly."
+    }
+  },
+  "map": {
+    "kicker": "Concept map",
+    "title": "Where the trees will grow",
+    "subtitle": "The exact spot will appear here after the plot is acquired. For now — a concept.",
+    "lead": "The Túbir map has two layers. Today it's a plan: a plot in East Kazakhstan, close to Öskemen, within reach of the Semipalatinsk test site and the Semey ribbon forest. Tomorrow it becomes an interactive map where every tree has coordinates, an owner's name, and a video report.",
+    "placeholderNote": "Schematic for illustration. The real plot will appear here after acquisition.",
+    "plans": [
+      { "title": "Exact coordinates", "text": "Every tree will get a GPS pin on a public map. Open to anyone who wants to verify the forest isn't imagined." },
+      { "title": "Search by surname", "text": "In the «Family Forest» concept the map shows every tree planted by — or in honour of — people with a shared surname. A living family tree." },
+      { "title": "Project zones", "text": "Layers on the map: main plot, Polygon Forest site, corporate plantings, orchards. Each with its own legend." },
+      { "title": "Open API", "text": "The map will be embeddable and open to researchers. Partner ESG reports can link to specific points." }
+    ],
+    "ctaTitle": "Be the first pin",
+    "ctaText": "The first 100 Founders get a place on the map before we plant the first tree.",
+    "ctaButton": "Become a Founder"
+  },
+  "onePager": {
+    "doc": "Concept · v1",
+    "date": "18.05.2026",
+    "tagline": "Real trees · East Kazakhstan",
+    "kicker": "Project concept",
+    "title": "Túbir — real trees in East Kazakhstan",
+    "lead": "An online service for planting real trees in East Kazakhstan, with video reports, GPS coordinates, and three years of post-planting care. Under the Taza Qazaqstan concept.",
+    "stats": [
+      { "value": "100 000", "label": "goal by 2030, trees" },
+      { "value": "EKZ", "label": "operating region" },
+      { "value": "3 yrs", "label": "post-planting care" },
+      { "value": "3 lang.", "label": "RU · KZ · EN" }
+    ],
+    "pillars": [
+      { "title": "Real, not virtual", "text": "Every tree on the ground, on video, with a GPS pin. Not carbon credits, not pixels — a living trunk." },
+      { "title": "East Kazakhstan context", "text": "A region of industrial emissions and the Semipalatinsk test site. We return the debt to the land that raised us." },
+      { "title": "Transparency", "text": "Open statistics, reports, coordinates, cost breakdown per tree. Documentation for CSR and ESG partners." }
+    ],
+    "conceptKicker": "What we do",
+    "conceptTitle": "Planting service + flagship projects",
+    "conceptText": "Core product — tree planting on demand for individuals and companies. On top — two special projects: the Polygon Atonement Forest (partnership with the National Nuclear Centre and the Abay Region) and the Family Forest (an open map of family plantings). And a B2B stream for East Kazakhstan enterprises.",
+    "askKicker": "What we ask",
+    "askTitle": "A plot, approvals, a grant",
+    "askText": "From the akimat — help allocating or leasing a plot in East Kazakhstan (15–30 ha over five years) and coordination with the forestry service. From Halyk Orman and the Ministry of Ecology — sapling supply. From funds — support for the starter batch. We're ready to sign under the Taza Qazaqstan concept.",
+    "printButton": "Print / PDF"
   },
   "admin": {
     "login": {

@@ -28,7 +28,7 @@ declare global {
 }
 
 type Props = {
-  action: "plant" | "callback";
+  action: "plant" | "callback" | "pledge";
   onToken: (token: string) => void;
   onError?: () => void;
   resetKey?: number;

@@ -106,11 +106,13 @@ export async function getProjectProgress(code = "vko_green"): Promise<ProjectPro
 
 export type PublicStats = {
   bookings_count: number;
+  pledges_count: number;
   planted_count: number;
 };
 
 const FALLBACK_STATS: PublicStats = {
   bookings_count: 0,
+  pledges_count: 0,
   planted_count: 0,
 };
 
@@ -137,6 +139,8 @@ export async function getPublicStats(): Promise<PublicStats> {
     return {
       bookings_count:
         typeof data?.bookings_count === "number" ? data.bookings_count : 0,
+      pledges_count:
+        typeof data?.pledges_count === "number" ? data.pledges_count : 0,
       planted_count:
         typeof data?.planted_count === "number" ? data.planted_count : 0,
     };

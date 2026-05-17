@@ -14,7 +14,7 @@ export function FloatingChat() {
 
   return (
     <>
-      <div className="fixed bottom-4 right-4 z-30 flex flex-col items-end gap-2 sm:bottom-6 sm:right-6">
+      <div data-floating-chat className="fixed bottom-4 right-4 z-30 flex flex-col items-end gap-2 print-hide sm:bottom-6 sm:right-6">
         <button
           type="button"
           onClick={() => setCallbackOpen(true)}

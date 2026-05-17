@@ -66,8 +66,38 @@ export function Footer() {
             </h4>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
               <li>
+                <Link href="/letter" className="hover:text-foreground">
+                  {t("letterLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/team" className="hover:text-foreground">
+                  {t("teamLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/press" className="hover:text-foreground">
+                  {t("pressLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/numbers" className="hover:text-foreground">
+                  {t("numbersLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/map" className="hover:text-foreground">
+                  {t("mapLink")}
+                </Link>
+              </li>
+              <li>
                 <Link href="/roadmap" className="hover:text-foreground">
                   {t("roadmapLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/partners" className="hover:text-foreground">
+                  {t("partnersLink")}
                 </Link>
               </li>
               <li>
@@ -78,6 +108,11 @@ export function Footer() {
               <li>
                 <Link href="/diaspora" className="hover:text-foreground">
                   {t("diasporaLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/pledge" className="hover:text-foreground">
+                  {t("pledgeLink")}
                 </Link>
               </li>
             </ul>

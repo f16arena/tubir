@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -6,9 +6,12 @@ import { Reveal } from "@/components/motion/Reveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { CountUp } from "@/components/motion/CountUp";
 import { ArrowRight } from "lucide-react";
+import { getPublicStats } from "@/lib/data/public-supabase";
 
-export function Honest() {
-  const t = useTranslations("honest");
+export async function Honest() {
+  const t = await getTranslations("honest");
+  const stats = await getPublicStats();
+  const live = stats.bookings_count;
 
   return (
     <section className="relative isolate overflow-hidden border-t border-border/60 paper">
@@ -57,7 +60,7 @@ export function Honest() {
                 </div>
                 <div className="mt-3 flex items-baseline gap-4">
                   <span className="num-lockup nums-tabular inline-flex items-baseline text-7xl text-foreground sm:text-8xl">
-                    <CountUp value={t("counterValue")} duration={1600} />
+                    <CountUp value={live} duration={1800} />
                     <span className="caret ml-1 inline-block h-[0.7em] w-[6px] -translate-y-1 bg-primary" />
                   </span>
                   <span className="text-serif-italic text-lg text-muted-foreground sm:text-xl">

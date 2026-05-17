@@ -6,18 +6,9 @@ import { cn } from "@/lib/utils";
 import { formatKzt } from "@/lib/data/species";
 import { getSpeciesCatalog } from "@/lib/data/public-supabase";
 import { speciesPhotos } from "@/lib/data/gallery";
-import { TreePine, TreeDeciduous, Apple, Cherry } from "lucide-react";
-import type { SpeciesCode } from "@/lib/db/types";
-import { Reveal } from "@/components/Reveal";
-
-const ICONS: Record<SpeciesCode, typeof TreePine> = {
-  pine: TreePine,
-  birch: TreeDeciduous,
-  spruce: TreePine,
-  oak: TreeDeciduous,
-  apple: Apple,
-  apricot: Cherry,
-};
+import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+import { PageIntro } from "@/components/editorial/PageIntro";
 
 export default async function TreesPage({
   params,
@@ -31,92 +22,94 @@ export default async function TreesPage({
   const species = await getSpeciesCatalog();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <Reveal>
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-3 text-muted-foreground">{t("subtitle")}</p>
-        </div>
-      </Reveal>
+    <>
+      <PageIntro
+        kicker="I · Породы"
+        title={t("title")}
+        subtitle={t("subtitle")}
+      />
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {species.map((s, i) => {
-          const Icon = ICONS[s.code];
-          return (
+      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-8 sm:pb-32">
+        <div className="border-t border-border/70">
+          {species.map((s, i) => (
             <Reveal key={s.code} delay={(i % 3) * 80}>
-              <article
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
-              >
-              <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                <Image
-                  src={speciesPhotos[s.code]}
-                  alt={t(`list.${s.code}.name`)}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute left-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-background/90 text-primary shadow-sm backdrop-blur">
-                  <Icon className="h-4 w-4" />
+              <article className="group grid items-center gap-6 border-b border-border/60 py-10 md:grid-cols-12 md:gap-10 md:py-14">
+                <div className="md:col-span-2">
+                  <span className="num-lockup nums-tabular block text-[4.5rem] leading-none text-primary/35 transition-colors duration-500 group-hover:text-primary sm:text-[5.5rem]">
+                    0{i + 1}
+                  </span>
                 </div>
-              </div>
 
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="text-lg font-semibold leading-tight">
-                  {t(`list.${s.code}.name`)}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                  {t(`list.${s.code}.description`)}
-                </p>
-
-                <dl className="mt-4 grid grid-cols-2 gap-2 text-xs">
-                  <div className="rounded-lg bg-muted/50 px-3 py-2">
-                    <dt className="text-muted-foreground">
-                      {t("yearsToMaturity")}
-                    </dt>
-                    <dd className="mt-0.5 font-mono text-sm font-semibold">
-                      ~{s.years_to_maturity}
-                    </dd>
+                <div className="md:col-span-3">
+                  <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+                    <Image
+                      src={speciesPhotos[s.code]}
+                      alt={t(`list.${s.code}.name`)}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
+                      className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.06]"
+                    />
                   </div>
-                  <div className="rounded-lg bg-muted/50 px-3 py-2">
-                    <dt className="text-muted-foreground">{t("co2")}</dt>
-                    <dd className="mt-0.5 font-mono text-sm font-semibold">
-                      {s.co2_kg_per_year} kg/y
-                    </dd>
-                  </div>
-                </dl>
+                </div>
 
-                <div className="mt-auto flex items-end justify-between border-t border-border/60 pt-4">
-                  <div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                <div className="md:col-span-4">
+                  <h2 className="text-display text-2xl leading-tight sm:text-3xl">
+                    {t(`list.${s.code}.name`)}
+                  </h2>
+                  <p className="mt-3 max-w-prose text-pretty text-base leading-[1.7] text-foreground/70">
+                    {t(`list.${s.code}.description`)}
+                  </p>
+                  <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                    <div className="flex items-baseline justify-between gap-3 border-b border-border/60 py-1">
+                      <dt className="editorial-kicker text-muted-foreground">
+                        {t("yearsToMaturity")}
+                      </dt>
+                      <dd className="nums-tabular font-mono text-foreground">
+                        ~{s.years_to_maturity}
+                      </dd>
+                    </div>
+                    <div className="flex items-baseline justify-between gap-3 border-b border-border/60 py-1">
+                      <dt className="editorial-kicker text-muted-foreground">
+                        CO₂
+                      </dt>
+                      <dd className="nums-tabular font-mono text-foreground">
+                        {s.co2_kg_per_year} kg/y
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <div className="flex items-end justify-between gap-4 md:col-span-3 md:flex-col md:items-end md:gap-6">
+                  <div className="text-right">
+                    <div className="editorial-kicker text-muted-foreground">
                       {t("perTree")}
                     </div>
-                    <div className="mt-0.5 text-2xl font-bold tracking-tight">
+                    <div className="num-lockup nums-tabular mt-2 text-4xl text-foreground sm:text-5xl">
                       {formatKzt(s.price_kzt, locale)}
                     </div>
                   </div>
                   <Link
                     href={{ pathname: "/plant", query: { species: s.code } }}
-                    className={cn(buttonVariants({ size: "sm" }))}
+                    className={cn(
+                      buttonVariants({ size: "sm" }),
+                      "group/btn h-10 rounded-full px-5",
+                    )}
                   >
                     {t("select")}
+                    <ArrowRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
                   </Link>
                 </div>
-              </div>
               </article>
             </Reveal>
-          );
-        })}
-      </div>
+          ))}
+        </div>
 
-      <p className="mx-auto mt-12 max-w-2xl rounded-lg border border-border/60 bg-muted/30 p-4 text-center text-xs text-muted-foreground">
-        {tPlant("noOnlinePay")}
-      </p>
-    </div>
+        <p className="mx-auto mt-12 max-w-xl text-center text-xs text-muted-foreground">
+          <span className="text-serif-italic">{tPlant("noOnlinePay")}</span>
+        </p>
+      </section>
+    </>
   );
 }
 
-// Trees page renders the catalogue inside <main>; the global footer follows.
-// We surface a CTA right above the footer:
 export const dynamic = "force-static";

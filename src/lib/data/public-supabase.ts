@@ -103,3 +103,45 @@ export async function getProjectProgress(code = "vko_green"): Promise<ProjectPro
   const rows = await fetchPublicRows<ProjectProgress>("projects", query);
   return rows?.[0] ?? FALLBACK_PROGRESS;
 }
+
+export type PublicStats = {
+  bookings_count: number;
+  planted_count: number;
+};
+
+const FALLBACK_STATS: PublicStats = {
+  bookings_count: 0,
+  planted_count: 0,
+};
+
+export async function getPublicStats(): Promise<PublicStats> {
+  const config = getPublicSupabaseConfig();
+  if (!config) return FALLBACK_STATS;
+
+  try {
+    const response = await fetch(
+      `${config.url}/rest/v1/rpc/get_public_stats`,
+      {
+        headers: {
+          apikey: config.key,
+          Authorization: `Bearer ${config.key}`,
+        },
+        next: { revalidate: 60 * 5 },
+      },
+    );
+    if (!response.ok) {
+      console.warn(`[supabase-public] get_public_stats returned ${response.status}`);
+      return FALLBACK_STATS;
+    }
+    const data = (await response.json()) as Partial<PublicStats> | null;
+    return {
+      bookings_count:
+        typeof data?.bookings_count === "number" ? data.bookings_count : 0,
+      planted_count:
+        typeof data?.planted_count === "number" ? data.planted_count : 0,
+    };
+  } catch (err) {
+    console.warn("[supabase-public] get_public_stats fetch failed:", err);
+    return FALLBACK_STATS;
+  }
+}

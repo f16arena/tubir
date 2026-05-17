@@ -1,17 +1,10 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Reveal } from "@/components/Reveal";
-import { Box, Scroll, Heart, Gift } from "lucide-react";
-
-const ICONS: Record<string, typeof Box> = {
-  triple: Box,
-  "coming-of-age": Scroll,
-  memory: Heart,
-  gift: Gift,
-};
+import { Reveal } from "@/components/motion/Reveal";
+import { PageIntro } from "@/components/editorial/PageIntro";
+import { ArrowRight } from "lucide-react";
 
 const HREFS: Record<string, string> = {
   triple: "/plant",
@@ -38,52 +31,56 @@ export default async function ProductsPage({
   }>;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
-      <Reveal>
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-3 text-muted-foreground">{t("subtitle")}</p>
-        </div>
-      </Reveal>
+    <>
+      <PageIntro
+        kicker="Особые форматы"
+        title={t("title")}
+        subtitle={t("subtitle")}
+      />
 
-      <div className="mt-16 grid gap-6 md:grid-cols-2">
-        {list.map((p, i) => {
-          const Icon = ICONS[p.code] ?? Box;
-          return (
-            <Reveal key={p.code} delay={i * 80}>
-              <article className="flex h-full flex-col rounded-2xl border border-border/60 bg-card p-6 transition-shadow hover:shadow-md sm:p-7">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" />
+      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-8 sm:pb-32">
+        <div className="border-t border-border/70">
+          {list.map((p, i) => (
+            <Reveal key={p.code} delay={(i % 2) * 80}>
+              <article className="group grid items-start gap-8 border-b border-border/60 py-14 md:grid-cols-12 md:gap-10 md:py-20">
+                <div className="md:col-span-3">
+                  <div className="flex items-baseline gap-4 md:flex-col md:items-start">
+                    <span className="num-lockup nums-tabular text-[4.5rem] leading-none text-primary sm:text-[5.5rem]">
+                      0{i + 1}
+                    </span>
+                    <span className="editorial-kicker text-muted-foreground">
+                      {p.status}
+                    </span>
                   </div>
-                  <Badge variant="outline" className="text-[10px] uppercase tracking-widest">
-                    {p.status}
-                  </Badge>
                 </div>
-                <h2 className="mt-5 text-xl font-semibold leading-tight sm:text-2xl">
-                  {p.title}
-                </h2>
-                <p className="mt-1 text-sm text-primary">{p.subtitle}</p>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {p.description}
-                </p>
-                <div className="mt-auto pt-6">
+                <div className="md:col-span-6">
+                  <h2 className="text-display text-balance text-3xl leading-tight sm:text-4xl">
+                    {p.title}
+                  </h2>
+                  <p className="mt-3 text-serif-italic text-lg text-primary sm:text-xl">
+                    {p.subtitle}
+                  </p>
+                  <p className="mt-6 max-w-prose text-pretty text-[1.05rem] leading-[1.75] text-foreground/80 sm:text-lg">
+                    {p.description}
+                  </p>
+                </div>
+                <div className="md:col-span-3 md:flex md:justify-end">
                   <Link
                     href={HREFS[p.code] ?? "/plant"}
                     className={cn(
                       buttonVariants({ size: "sm", variant: "outline" }),
+                      "group/btn h-11 rounded-full px-6 text-base",
                     )}
                   >
                     {p.cta}
+                    <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
                   </Link>
                 </div>
               </article>
             </Reveal>
-          );
-        })}
-      </div>
-    </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

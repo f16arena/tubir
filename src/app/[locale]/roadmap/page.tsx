@@ -1,11 +1,13 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion/Reveal";
+import { PageIntro } from "@/components/editorial/PageIntro";
+import { cn } from "@/lib/utils";
 
-const STATUS_STYLES: Record<string, string> = {
-  current: "border-primary bg-primary text-primary-foreground",
-  next: "border-primary/50 bg-primary/10 text-primary",
-  planned: "border-border bg-muted/40 text-muted-foreground",
-  vision: "border-dashed border-border bg-transparent text-muted-foreground",
+const STATUS_DOT: Record<string, string> = {
+  current: "bg-primary shadow-[0_0_0_4px_oklch(0.42_0.13_148_/_0.18)]",
+  next: "bg-primary/70",
+  planned: "bg-foreground/30",
+  vision: "bg-foreground/15 border border-dashed border-foreground/40",
 };
 
 export default async function RoadmapPage({
@@ -20,61 +22,54 @@ export default async function RoadmapPage({
     label: string;
     title: string;
     text: string;
-    status: keyof typeof STATUS_STYLES;
+    status: keyof typeof STATUS_DOT;
   }>;
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
-      <Reveal>
-        <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-3 text-muted-foreground">{t("subtitle")}</p>
-        </div>
-      </Reveal>
+    <>
+      <PageIntro
+        kicker="Дорожная карта"
+        title={t("title")}
+        subtitle={t("subtitle")}
+      />
 
-      <ol className="mt-16 relative">
-        <div
-          aria-hidden
-          className="absolute left-4 top-2 bottom-2 w-px bg-border sm:left-1/2"
-        />
-        {stages.map((s, i) => (
-          <Reveal key={s.label} delay={i * 60}>
-            <li
-              className={
-                "relative pl-12 pb-10 sm:pl-0 sm:pb-14 " +
-                (i % 2 === 0 ? "sm:pr-[55%]" : "sm:pl-[55%]")
-              }
-            >
-              <span
-                className={
-                  "absolute left-2 top-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full border-2 sm:left-1/2 sm:-translate-x-1/2 " +
-                  STATUS_STYLES[s.status]
-                }
-              >
-                {s.status === "current" ? (
-                  <span className="h-2 w-2 rounded-full bg-primary-foreground" />
-                ) : null}
-              </span>
+      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-8 sm:pb-32">
+        <ol className="border-t border-border/70">
+          {stages.map((s, i) => (
+            <Reveal key={s.label} delay={i * 60}>
+              <li className="group grid items-start gap-6 border-b border-border/60 py-10 md:grid-cols-12 md:gap-10 md:py-14">
+                <div className="md:col-span-3">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={cn(
+                        "inline-block h-3 w-3 rounded-full",
+                        STATUS_DOT[s.status],
+                      )}
+                    />
+                    <span className="editorial-kicker text-muted-foreground">
+                      {s.label}
+                    </span>
+                  </div>
+                </div>
+                <div className="md:col-span-5">
+                  <h2 className="text-display text-balance text-2xl leading-tight sm:text-3xl">
+                    {s.title}
+                  </h2>
+                </div>
+                <div className="md:col-span-4">
+                  <p className="max-w-prose text-pretty text-base leading-[1.75] text-foreground/75">
+                    {s.text}
+                  </p>
+                </div>
+              </li>
+            </Reveal>
+          ))}
+        </ol>
 
-              <div className="font-mono text-xs font-semibold uppercase tracking-widest text-primary">
-                {s.label}
-              </div>
-              <h2 className="mt-2 text-xl font-semibold leading-tight sm:text-2xl">
-                {s.title}
-              </h2>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed sm:text-base">
-                {s.text}
-              </p>
-            </li>
-          </Reveal>
-        ))}
-      </ol>
-
-      <p className="mx-auto mt-8 max-w-xl text-center text-xs italic text-muted-foreground">
-        {t("honestNote")}
-      </p>
-    </div>
+        <p className="mx-auto mt-12 max-w-2xl text-center text-sm text-muted-foreground">
+          <span className="text-serif-italic">{t("honestNote")}</span>
+        </p>
+      </section>
+    </>
   );
 }

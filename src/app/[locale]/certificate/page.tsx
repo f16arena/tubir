@@ -1,11 +1,12 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Reveal } from "@/components/Reveal";
-import { SampleCertificate } from "@/components/SampleCertificate";
-import { Check } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+import { MagneticButton } from "@/components/motion/MagneticButton";
+import { PageIntro } from "@/components/editorial/PageIntro";
+import { SampleCertificate } from "@/components/SampleCertificate";
 
 export default async function CertificatePage({
   params,
@@ -19,62 +20,74 @@ export default async function CertificatePage({
   const elements = t.raw("elements") as string[];
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
-      <Reveal>
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-3 text-muted-foreground">{t("subtitle")}</p>
-          <p className="mx-auto mt-8 max-w-xl text-pretty text-base text-foreground/80 leading-relaxed">
+    <>
+      <PageIntro
+        kicker="Документ"
+        title={t("title")}
+        subtitle={t("subtitle")}
+      />
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-8">
+        <Reveal>
+          <p className="drop-cap mx-auto max-w-[58ch] text-pretty text-[1.1rem] leading-[1.85] text-foreground/85 sm:text-xl">
             {t("lead")}
           </p>
-        </div>
-      </Reveal>
-
-      <Reveal>
-        <div className="mt-12">
-          <SampleCertificate />
-        </div>
-      </Reveal>
-
-      <div className="mt-16 grid gap-8 md:grid-cols-2">
-        <Reveal>
-          <div>
-            <h2 className="text-xl font-semibold tracking-tight">
-              {t("elementsTitle")}
-            </h2>
-            <ul className="mt-4 space-y-3">
-              {elements.map((el) => (
-                <li key={el} className="flex items-start gap-2 text-sm">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>{el}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </Reveal>
-        <Reveal delay={120}>
-          <div className="rounded-2xl border border-border/60 bg-muted/30 p-6 sm:p-7">
-            <h2 className="text-xl font-semibold tracking-tight">{t("noteTitle")}</h2>
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+      </section>
+
+      <section className="mx-auto mt-16 max-w-5xl px-4 sm:mt-24 sm:px-8">
+        <Reveal>
+          <SampleCertificate />
+        </Reveal>
+      </section>
+
+      <section className="mx-auto mt-20 grid max-w-7xl gap-12 px-4 sm:mt-28 sm:px-8 md:grid-cols-12">
+        <Reveal className="md:col-span-7">
+          <div className="editorial-kicker text-muted-foreground">
+            {t("elementsTitle")}
+          </div>
+          <ul className="mt-6 border-t border-border/70">
+            {elements.map((el, i) => (
+              <li
+                key={el}
+                className="flex items-baseline gap-6 border-b border-border/60 py-5"
+              >
+                <span className="num-lockup nums-tabular w-12 text-3xl leading-none text-primary/60">
+                  0{i + 1}
+                </span>
+                <span className="text-pretty text-base leading-[1.7] text-foreground/85 sm:text-lg">
+                  {el}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
+        <Reveal className="md:col-span-5" delay={120}>
+          <div className="sticky top-24 border-l-2 border-primary pl-6">
+            <div className="editorial-kicker text-primary">{t("noteTitle")}</div>
+            <p className="mt-3 max-w-prose text-pretty text-base leading-[1.7] text-foreground/85">
               {t("noteText")}
             </p>
-            <div className="mt-6">
-              <Link
-                href="/plant"
-                className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "group h-11 px-6 text-base",
-                )}
-              >
-                {tHero("cta")}
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
+            <div className="mt-8">
+              <MagneticButton>
+                <Link
+                  href="/plant"
+                  className={cn(
+                    buttonVariants({ size: "lg" }),
+                    "group h-12 rounded-full px-7 text-base",
+                  )}
+                >
+                  {tHero("cta")}
+                  <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </MagneticButton>
             </div>
           </div>
         </Reveal>
-      </div>
-    </div>
+      </section>
+
+      <div className="h-24 sm:h-32" />
+    </>
   );
 }

@@ -1,9 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion/Reveal";
+import { PageIntro } from "@/components/editorial/PageIntro";
 import { CtaBottom } from "@/components/sections/CtaBottom";
 
 export default async function HowPage({
@@ -14,7 +11,6 @@ export default async function HowPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("howItWorks");
-  const tHero = await getTranslations("hero");
   const steps = t.raw("steps") as Array<{
     n: string;
     title: string;
@@ -23,52 +19,37 @@ export default async function HowPage({
 
   return (
     <>
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
-        <Reveal>
-          <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              {t("title")}
-            </h1>
-            <p className="mt-3 text-muted-foreground">{t("subtitle")}</p>
-          </div>
-        </Reveal>
+      <PageIntro
+        kicker="II · Как"
+        title={t("title")}
+        subtitle={t("subtitle")}
+      />
 
-        <div className="mt-16 space-y-10">
+      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-8 sm:pb-32">
+        <div className="border-t border-border/70">
           {steps.map((step, i) => (
             <Reveal key={step.n} delay={i * 80}>
-              <div className="grid gap-6 border-l-2 border-primary/30 pl-8 sm:grid-cols-[auto_1fr] sm:gap-10 sm:border-l-0 sm:pl-0">
-                <div className="font-mono text-5xl font-bold text-primary/20 leading-none sm:text-7xl">
-                  {step.n}
+              <article className="group grid items-start gap-6 border-b border-border/60 py-12 md:grid-cols-12 md:gap-10 md:py-16">
+                <div className="md:col-span-3">
+                  <span className="num-lockup nums-tabular block text-[6rem] leading-none text-primary/35 transition-colors duration-500 group-hover:text-primary sm:text-[8rem]">
+                    {step.n}
+                  </span>
                 </div>
-                <div>
-                  <h2 className="text-2xl font-semibold leading-tight">
+                <div className="md:col-span-5">
+                  <h2 className="text-display text-balance text-3xl leading-tight sm:text-4xl">
                     {step.title}
                   </h2>
-                  <p className="mt-3 text-muted-foreground leading-relaxed">
+                </div>
+                <div className="md:col-span-4">
+                  <p className="max-w-prose text-pretty text-base leading-[1.75] text-foreground/75 sm:text-lg">
                     {step.text}
                   </p>
-                  {i === steps.length - 1 ? null : (
-                    <div aria-hidden className="mt-8 h-px w-12 bg-border" />
-                  )}
                 </div>
-              </div>
+              </article>
             </Reveal>
           ))}
         </div>
-
-        <div className="mt-20 flex justify-center">
-          <Link
-            href="/plant"
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "group h-11 px-6 text-base",
-            )}
-          >
-            {tHero("cta")}
-            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      </div>
+      </section>
       <CtaBottom />
     </>
   );

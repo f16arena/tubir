@@ -332,3 +332,31 @@
     scroll-behavior: auto;
   }
 }
+
+/* Mobile: dial back GPU-heavy effects on small screens to protect LCP/INP
+   and battery on low-end Android. Editorial typography stays. */
+@media (max-width: 640px) {
+  .ken-burns {
+    animation: none;
+    transform: scale(1.05);
+  }
+  .grain::after {
+    opacity: 0.1;
+    background-size: 140px 140px;
+  }
+  .halftone {
+    background-size: 18px 18px;
+    opacity: 0.08;
+  }
+}
+
+@media (prefers-reduced-data: reduce) {
+  .ken-burns {
+    animation: none;
+    transform: none;
+  }
+  .grain::after,
+  .halftone {
+    display: none;
+  }
+}

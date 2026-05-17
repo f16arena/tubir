@@ -1,13 +1,11 @@
-import Image from "next/image";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Reveal } from "@/components/Reveal";
-import { ArrowRight, MapPin } from "lucide-react";
-import { photos } from "@/lib/data/gallery";
+import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+import { MagneticButton } from "@/components/motion/MagneticButton";
+import { PageIntro } from "@/components/editorial/PageIntro";
 
 export default async function AtamekenPage({
   params,
@@ -21,103 +19,132 @@ export default async function AtamekenPage({
 
   return (
     <>
-      <section className="relative isolate overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <Image src={photos.about} alt="" fill priority sizes="100vw" className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
-        </div>
-        <div className="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-32">
-          <Badge variant="secondary" className="mb-5">
-            {t("label")}
-          </Badge>
-          <h1 className="text-balance text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
-            {t("title")}
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg text-foreground/85">
-            {t("subtitle")}
-          </p>
-        </div>
-      </section>
+      <PageIntro
+        kicker={t("label")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+      />
 
-      <article className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
+      <section className="mx-auto max-w-7xl px-4 sm:px-8">
         <Reveal>
-          <p className="text-pretty text-xl leading-relaxed text-foreground/90">
+          <p className="drop-cap mx-auto max-w-[58ch] text-pretty text-[1.1rem] leading-[1.9] text-foreground/85 sm:text-xl">
             {t("lead")}
           </p>
         </Reveal>
+      </section>
 
-        <Reveal>
-          <h2 className="mt-16 text-2xl font-semibold tracking-tight">
+      <section className="mx-auto mt-20 grid max-w-7xl gap-8 px-4 sm:mt-28 sm:px-8 md:grid-cols-12">
+        <Reveal className="md:col-span-3">
+          <div className="editorial-kicker text-muted-foreground">Замысел</div>
+        </Reveal>
+        <Reveal className="md:col-span-9" delay={120}>
+          <h2 className="text-display text-balance text-[clamp(2rem,4vw,3.4rem)] leading-[1.05]">
             {t("concept")}
           </h2>
-          <p className="mt-4 text-pretty text-muted-foreground leading-relaxed">
+          <p className="mt-6 max-w-[58ch] text-pretty text-base leading-[1.8] text-foreground/80 sm:text-lg">
             {t("conceptText")}
           </p>
         </Reveal>
+      </section>
 
+      {/* Concept map preview */}
+      <section className="mx-auto mt-20 max-w-7xl px-4 sm:mt-28 sm:px-8">
         <Reveal>
-          <div className="mt-10 rounded-2xl border border-border/60 bg-muted/20 p-8 sm:p-10">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div className="font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                preview · карта · карта
-              </div>
-              <MapPin className="h-5 w-5 text-primary" />
+          <div className="rounded-sm border border-dashed border-border bg-muted/20 p-8 sm:p-12">
+            <div className="flex items-baseline justify-between gap-4 border-b border-border/60 pb-4">
+              <span className="editorial-kicker text-muted-foreground">
+                preview · карта фамилий
+              </span>
+              <span className="text-serif-italic text-sm text-muted-foreground">
+                Q1 2027
+              </span>
             </div>
-            <div className="mt-6 grid grid-cols-3 gap-3 sm:grid-cols-6">
-              {Array.from({ length: 12 }).map((_, i) => (
+            <div className="mt-8 grid grid-cols-4 gap-4 sm:grid-cols-8">
+              {Array.from({ length: 16 }).map((_, i) => (
                 <div
                   key={i}
-                  className="relative aspect-square rounded-lg border border-border/60 bg-background"
-                  style={{
-                    transform: `translateY(${(i % 3) * 4}px)`,
-                  }}
+                  className="relative aspect-square rounded-sm border border-border/40 bg-background/80"
+                  style={{ transform: `translateY(${(i % 3) * 6}px)` }}
                 >
-                  <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary" />
+                  <div
+                    className={
+                      "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full " +
+                      (i % 5 === 0
+                        ? "h-2.5 w-2.5 bg-primary"
+                        : "h-1.5 w-1.5 bg-primary/40")
+                    }
+                  />
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-center text-xs italic text-muted-foreground">
-              {t("statusValue")}
+            <p className="mt-8 text-center text-sm text-muted-foreground">
+              <span className="text-serif-italic">{t("statusValue")}</span>
             </p>
           </div>
         </Reveal>
+      </section>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+      <section className="mx-auto mt-20 max-w-7xl px-4 sm:mt-28 sm:px-8">
+        <div className="border-t border-border/70">
           {blocks.map((b, i) => (
-            <Reveal key={b.title} delay={i * 80}>
-              <Card className="h-full border-border/60">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold">{b.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+            <Reveal key={b.title} delay={(i % 2) * 80}>
+              <article className="grid items-start gap-6 border-b border-border/60 py-12 md:grid-cols-12 md:gap-10 md:py-16">
+                <div className="md:col-span-2">
+                  <span className="num-lockup nums-tabular block text-[3.5rem] leading-none text-primary sm:text-[4.5rem]">
+                    0{i + 1}
+                  </span>
+                </div>
+                <div className="md:col-span-5">
+                  <h3 className="text-display text-2xl leading-tight sm:text-3xl">
+                    {b.title}
+                  </h3>
+                </div>
+                <div className="md:col-span-5">
+                  <p className="max-w-prose text-pretty text-base leading-[1.75] text-foreground/75">
                     {b.text}
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </article>
             </Reveal>
           ))}
         </div>
+      </section>
 
-        <Reveal>
-          <div className="mt-16 rounded-2xl bg-primary p-8 text-primary-foreground sm:p-12">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+      <section className="relative isolate mt-20 overflow-hidden bg-primary text-primary-foreground sm:mt-28">
+        <div
+          aria-hidden
+          className="halftone absolute inset-0 text-primary-foreground"
+        />
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-24 sm:px-8 sm:py-32 md:grid-cols-12">
+          <Reveal className="md:col-span-3">
+            <div className="editorial-kicker text-primary-foreground/70">
+              Дальше
+            </div>
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-9">
+            <h2 className="text-display text-balance text-[clamp(2rem,4vw,3.6rem)] leading-[1.05]">
               {t("cta")}
             </h2>
-            <p className="mt-3 max-w-xl text-primary-foreground/85">{t("ctaText")}</p>
-            <div className="mt-6">
-              <Link
-                href="/plant"
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "secondary" }),
-                  "group h-11 px-6 text-base",
-                )}
-              >
-                {t("cta")}
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
+            <p className="mt-6 max-w-[58ch] text-pretty leading-[1.75] text-primary-foreground/85">
+              {t("ctaText")}
+            </p>
+            <div className="mt-10">
+              <MagneticButton>
+                <Link
+                  href="/plant"
+                  className={cn(
+                    buttonVariants({ size: "lg", variant: "secondary" }),
+                    "group h-12 rounded-full px-7 text-base",
+                  )}
+                >
+                  {t("cta")}
+                  <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </MagneticButton>
             </div>
-          </div>
-        </Reveal>
-      </article>
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }

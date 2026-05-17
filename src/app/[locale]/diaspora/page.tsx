@@ -2,9 +2,10 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Reveal } from "@/components/Reveal";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+import { MagneticButton } from "@/components/motion/MagneticButton";
+import { PageIntro } from "@/components/editorial/PageIntro";
 
 export default async function DiasporaPage({
   params,
@@ -17,72 +18,106 @@ export default async function DiasporaPage({
   const blocks = t.raw("blocks") as Array<{ title: string; text: string }>;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
-      <Reveal>
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-3 text-muted-foreground">{t("subtitle")}</p>
-          <p className="mx-auto mt-8 max-w-2xl text-pretty text-lg text-foreground/90 leading-relaxed">
+    <>
+      <PageIntro
+        kicker="Диаспора"
+        title={t("title")}
+        subtitle={t("subtitle")}
+      />
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-8">
+        <Reveal>
+          <p className="drop-cap mx-auto max-w-[58ch] text-pretty text-[1.1rem] leading-[1.85] text-foreground/85 sm:text-xl">
             {t("lead")}
           </p>
-        </div>
-      </Reveal>
+        </Reveal>
+      </section>
 
-      <div className="mt-16 grid gap-5 sm:grid-cols-2">
-        {blocks.map((b, i) => (
-          <Reveal key={b.title} delay={i * 80}>
-            <Card className="h-full border-border/60 transition-shadow hover:shadow-md">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold">{b.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                  {b.text}
-                </p>
-              </CardContent>
-            </Card>
+      <section className="mx-auto mt-20 max-w-7xl px-4 sm:mt-28 sm:px-8">
+        <div className="border-t border-border/70">
+          {blocks.map((b, i) => (
+            <Reveal key={b.title} delay={(i % 2) * 80}>
+              <article className="grid items-start gap-6 border-b border-border/60 py-12 md:grid-cols-12 md:gap-10 md:py-16">
+                <div className="md:col-span-3">
+                  <span className="num-lockup nums-tabular block text-[3.5rem] leading-none text-primary sm:text-[4.5rem]">
+                    0{i + 1}
+                  </span>
+                </div>
+                <div className="md:col-span-5">
+                  <h2 className="text-display text-balance text-2xl leading-tight sm:text-3xl">
+                    {b.title}
+                  </h2>
+                </div>
+                <div className="md:col-span-4">
+                  <p className="max-w-prose text-pretty text-base leading-[1.75] text-foreground/75">
+                    {b.text}
+                  </p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-20 max-w-7xl px-4 sm:px-8">
+        <Reveal>
+          <div className="grid gap-8 border-t border-border/60 py-10 md:grid-cols-12 md:py-12">
+            <div className="md:col-span-3">
+              <div className="editorial-kicker text-muted-foreground">
+                {t("currencies")}
+              </div>
+            </div>
+            <div className="md:col-span-6">
+              <div className="num-lockup flex items-baseline gap-5 text-5xl sm:text-6xl">
+                <span>USD</span>
+                <span className="text-border">·</span>
+                <span>EUR</span>
+                <span className="text-border">·</span>
+                <span>KZT</span>
+              </div>
+            </div>
+            <div className="md:col-span-3">
+              <p className="text-sm text-muted-foreground">
+                <span className="text-serif-italic">
+                  {t("currenciesNote")}
+                </span>
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="relative isolate mt-24 overflow-hidden border-t border-border/60 paper sm:mt-32">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-24 sm:px-8 sm:py-32 md:grid-cols-12">
+          <Reveal className="md:col-span-3">
+            <div className="editorial-kicker text-muted-foreground">
+              Дальше
+            </div>
           </Reveal>
-        ))}
-      </div>
-
-      <Reveal>
-        <div className="mt-12 rounded-2xl border border-dashed border-border bg-card p-6 text-center sm:p-7">
-          <div className="text-xs font-semibold uppercase tracking-widest text-primary">
-            {t("currencies")}
-          </div>
-          <div className="mt-3 flex items-center justify-center gap-3 text-2xl font-semibold tracking-tight">
-            <span>USD</span>
-            <span className="text-border">·</span>
-            <span>EUR</span>
-            <span className="text-border">·</span>
-            <span>KZT</span>
-          </div>
-          <p className="mx-auto mt-3 max-w-md text-xs text-muted-foreground">
-            {t("currenciesNote")}
-          </p>
+          <Reveal delay={120} className="md:col-span-9">
+            <h2 className="text-display text-balance text-[clamp(2rem,4vw,3.6rem)] leading-[1.05]">
+              {t("ctaTitle")}
+            </h2>
+            <p className="mt-6 max-w-[58ch] text-pretty leading-[1.75] text-foreground/80">
+              <span className="text-serif-italic">{t("ctaText")}</span>
+            </p>
+            <div className="mt-10">
+              <MagneticButton>
+                <Link
+                  href="/plant"
+                  className={cn(
+                    buttonVariants({ size: "lg" }),
+                    "group h-12 rounded-full px-7 text-base",
+                  )}
+                >
+                  {t("ctaButton")}
+                  <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </MagneticButton>
+            </div>
+          </Reveal>
         </div>
-      </Reveal>
-
-      <Reveal>
-        <div className="mt-16 rounded-2xl border border-border/60 bg-muted/30 p-8 text-center sm:p-12">
-          <h2 className="text-balance text-2xl font-bold tracking-tight sm:text-3xl">
-            {t("ctaTitle")}
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">{t("ctaText")}</p>
-          <div className="mt-6 flex justify-center">
-            <Link
-              href="/plant"
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "group h-11 px-6 text-base",
-              )}
-            >
-              {t("ctaButton")}
-              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-        </div>
-      </Reveal>
-    </div>
+      </section>
+    </>
   );
 }

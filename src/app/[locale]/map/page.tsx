@@ -6,6 +6,8 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { PageIntro } from "@/components/editorial/PageIntro";
+import { PlotMap } from "@/components/map/PlotMap";
+import { PLOTS, REFERENCE_POINTS } from "@/lib/data/plots";
 
 export default async function MapPage({
   params,
@@ -15,6 +17,7 @@ export default async function MapPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("map");
+  const googleMapsKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
 
   return (
     <>
@@ -32,22 +35,64 @@ export default async function MapPage({
         </Reveal>
       </section>
 
-      {/* Concept map — abstract SVG silhouette of VKO with planned plot */}
+      {/* Live Google Map when API key is set; SVG concept otherwise. */}
       <section className="mx-auto mt-16 max-w-7xl px-4 sm:mt-24 sm:px-8">
         <Reveal>
-          <div className="relative overflow-hidden rounded-sm border border-dashed border-border bg-muted/20">
-            <div className="absolute left-4 top-4 z-10 flex items-baseline gap-3">
-              <span className="editorial-kicker text-muted-foreground">
-                concept · ВКО · 49.95° N · 82.61° E
-              </span>
+          {googleMapsKey ? (
+            <div className="relative">
+              <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
+                <span className="editorial-kicker text-muted-foreground">
+                  {PLOTS[0]
+                    ? `${PLOTS[0].name} · ${PLOTS[0].center.lat.toFixed(3)}° N · ${PLOTS[0].center.lng.toFixed(3)}° E`
+                    : "ВКО · карта"}
+                </span>
+                <div className="flex items-baseline gap-4 text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-2">
+                    <span
+                      className="inline-block h-2 w-2 rounded-full"
+                      style={{ backgroundColor: "#2c5a33" }}
+                    />
+                    Túbir
+                  </span>
+                  {REFERENCE_POINTS.map((p) => (
+                    <span key={p.name} className="inline-flex items-center gap-2">
+                      <span
+                        className="inline-block h-2 w-2 rounded-full"
+                        style={{
+                          backgroundColor:
+                            p.kind === "polygon"
+                              ? "#a44a3a"
+                              : p.kind === "forest"
+                                ? "#7a9460"
+                                : "#3a3a32",
+                        }}
+                      />
+                      {p.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <PlotMap apiKey={googleMapsKey} />
+              <p className="mt-3 text-xs text-muted-foreground">
+                <span className="text-serif-italic">
+                  {t("placeholderNote")}
+                </span>
+              </p>
             </div>
-            <div className="aspect-[16/9] w-full">
-              <svg
-                viewBox="0 0 1600 900"
-                className="block h-full w-full"
-                preserveAspectRatio="xMidYMid meet"
-                aria-hidden
-              >
+          ) : (
+            <div className="relative overflow-hidden rounded-sm border border-dashed border-border bg-muted/20">
+              <div className="absolute left-4 top-4 z-10 flex items-baseline gap-3">
+                <span className="editorial-kicker text-muted-foreground">
+                  concept · ВКО · 49.95° N · 82.61° E
+                </span>
+              </div>
+              <div className="aspect-[16/9] w-full">
+                <svg
+                  viewBox="0 0 1600 900"
+                  className="block h-full w-full"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden
+                >
                 <defs>
                   <pattern
                     id="grid"
@@ -158,10 +203,11 @@ export default async function MapPage({
                 </text>
               </svg>
             </div>
-            <div className="border-t border-border/60 bg-background/60 px-4 py-3 text-xs text-muted-foreground sm:px-6">
-              <span className="text-serif-italic">{t("placeholderNote")}</span>
+              <div className="border-t border-border/60 bg-background/60 px-4 py-3 text-xs text-muted-foreground sm:px-6">
+                <span className="text-serif-italic">{t("placeholderNote")}</span>
+              </div>
             </div>
-          </div>
+          )}
         </Reveal>
       </section>
 

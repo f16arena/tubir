@@ -1,8 +1,8 @@
 -- Túbir — Founders Circle pledges
 -- Lightweight intent capture: name + email, no commitment.
--- Distinct from tree_requests (which is the booking funnel) and from
--- callback_requests (phone-based intent). RLS allows anon to insert,
--- only service_role can read.
+-- Distinct from tree_requests (the booking funnel) and from
+-- callback_requests (phone-based intent). RLS allows anon to insert
+-- only through trusted server code; admins read via service_role.
 
 create table if not exists public.pledges (
   id uuid primary key default gen_random_uuid(),
@@ -14,7 +14,11 @@ create table if not exists public.pledges (
   user_agent text,
   ip_hash text,
   identity_hash text,
-  created_at timestamptz not null default now()
+  status text not null default 'pending'
+    check (status in ('pending','contacted','converted','cancelled','spam')),
+  admin_note text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 
 create unique index if not exists pledges_email_unique
@@ -23,13 +27,41 @@ create unique index if not exists pledges_email_unique
 create index if not exists pledges_created_at_idx
   on public.pledges (created_at desc);
 
+create index if not exists pledges_status_idx
+  on public.pledges (status);
+
+create index if not exists pledges_identity_hash_idx
+  on public.pledges (identity_hash);
+
 alter table public.pledges enable row level security;
-
-drop policy if exists "pledges_anon_insert" on public.pledges;
-create policy "pledges_anon_insert" on public.pledges
-  for insert with check (true);
-
+revoke insert, update, delete on public.pledges from anon, authenticated;
 -- No SELECT policy = anon cannot read pledges. service_role only.
+
+-- Trigger: keep updated_at fresh on UPDATE. Uses set_updated_at()
+-- function defined in 0003_security_admin.sql.
+drop trigger if exists pledges_set_updated_at on public.pledges;
+create trigger pledges_set_updated_at
+  before update on public.pledges
+  for each row
+  execute function public.set_updated_at();
+
+-- Allow the submission_events table to track pledge bucket too.
+-- Drop and recreate the bucket check to include 'pledge'.
+do $$
+begin
+  if exists (
+    select 1
+    from pg_constraint
+    where conname = 'submission_events_bucket_check'
+  ) then
+    alter table public.submission_events
+      drop constraint submission_events_bucket_check;
+  end if;
+end $$;
+
+alter table public.submission_events
+  add constraint submission_events_bucket_check
+  check (bucket in ('plant','callback','pledge'));
 
 -- ============================================================
 -- Update public stats RPC to count both bookings and pledges
@@ -49,6 +81,7 @@ as $$
     ), 0),
     'pledges_count', coalesce((
       select count(*)::int from public.pledges
+      where status <> 'cancelled' and status <> 'spam'
     ), 0),
     'planted_count', coalesce((
       select sum(current_trees)::int

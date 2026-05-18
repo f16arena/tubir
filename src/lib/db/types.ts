@@ -15,6 +15,13 @@ export type RequestStatus =
 
 export type CallbackStatus = "pending" | "called" | "missed" | "closed" | "spam";
 
+export type PledgeStatus =
+  | "pending"
+  | "contacted"
+  | "converted"
+  | "cancelled"
+  | "spam";
+
 export type Species = {
   id: string;
   code: SpeciesCode;
@@ -58,6 +65,22 @@ export type CallbackRequest = {
   locale: string;
   source_page: string | null;
   status: CallbackStatus;
+  user_agent: string | null;
+  ip_hash: string | null;
+  identity_hash: string | null;
+  admin_note: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type Pledge = {
+  id: string;
+  name: string;
+  email: string;
+  species_code: SpeciesCode | null;
+  locale: string;
+  source_page: string | null;
+  status: PledgeStatus;
   user_agent: string | null;
   ip_hash: string | null;
   identity_hash: string | null;

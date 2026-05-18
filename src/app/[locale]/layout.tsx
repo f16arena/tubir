@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingChat } from "@/components/layout/FloatingChat";
 import { CookiesBanner } from "@/components/CookiesBanner";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { Analytics } from "@/components/Analytics";
 import { Toaster } from "@/components/ui/sonner";
 import { getOgLocale, getSiteUrl, siteName } from "@/lib/seo";
 import "../globals.css";
@@ -95,6 +96,7 @@ export default async function LocaleLayout({
           <CookiesBanner />
           <Toaster richColors position="top-center" />
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -471,7 +471,15 @@
     "statusLabel": "Status",
     "statusValue": "Technical concept. Map launch — Q1 2027, after the first batch of plantings.",
     "cta": "Plant the first family tree",
-    "ctaText": "When the tree is planted and gets coordinates — it goes straight to the map under your surname."
+    "ctaText": "When the tree is planted and gets coordinates — it goes straight to the map under your surname.",
+    "search": {
+      "label": "Search by surname",
+      "placeholder": "Type your surname",
+      "resultLabel": "Result",
+      "noTreesYet": "No trees yet in the Túbir forest for the surname «{name}».",
+      "beFirst": "Be the first — and this surname will appear on the map of Kazakhstan in a few months. When we plant it, your family gets its own pin with coordinates.",
+      "ctaButton": "Be the first {name}"
+    }
   },
   "products": {
     "title": "Special offerings",
@@ -830,6 +838,55 @@
     "askText": "From the akimat — help allocating or leasing a plot in East Kazakhstan (15–30 ha over five years) and coordination with the forestry service. From Halyk Orman and the Ministry of Ecology — sapling supply. From funds — support for the starter batch. We're ready to sign under the Taza Qazaqstan concept.",
     "printButton": "Print / PDF"
   },
+  "me": {
+    "login": {
+      "eyebrow": "My account",
+      "title": "Sign in",
+      "subtitle": "A magic link to your inbox — no password. If this email has reservations or requests, you'll see them.",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Send link",
+      "sending": "Sending...",
+      "sentTitle": "Check your email",
+      "sentText": "If this email has records in Túbir, we've sent a sign-in link.",
+      "errorTitle": "Couldn't send",
+      "hint": "No password. Open the email, click the button — and you're in.",
+      "errors": {
+        "validation": "Enter a valid email.",
+        "auth": "Supabase Auth couldn't send the link. Try again later."
+      }
+    },
+    "dashboard": {
+      "eyebrow": "My account",
+      "title": "Your Túbir",
+      "subtitle": "Reservations and requests tied to {email}.",
+      "signedInAs": "Signed in",
+      "signOut": "Sign out",
+      "loadError": "Couldn't load records. Check Supabase migrations and policies.",
+      "pledgesKicker": "Founders",
+      "pledgesTitle": "Your seats in the first hundred",
+      "noPledges": "No reservations yet. Head to /pledge to claim your place.",
+      "requestsKicker": "Requests",
+      "requestsTitle": "Your planting requests",
+      "noRequests": "Requests will appear here once you submit your first one.",
+      "statuses": {
+        "pledge": {
+          "pending": "New",
+          "contacted": "Contacted",
+          "converted": "Converted",
+          "cancelled": "Cancelled",
+          "spam": "Spam"
+        },
+        "tree": {
+          "pending": "Pending",
+          "contacted": "Contacted",
+          "paid": "Paid",
+          "planted": "Planted",
+          "cancelled": "Cancelled"
+        }
+      }
+    }
+  },
   "admin": {
     "login": {
       "eyebrow": "Admin",
@@ -857,10 +914,12 @@
       "loadError": "Could not load requests. Check Supabase migrations and permissions.",
       "treeFilter": "Tree request status",
       "callbackFilter": "Callback status",
+      "pledgeFilter": "Founders pledge status",
       "allStatuses": "All statuses",
       "applyFilters": "Apply",
       "treeRequests": "Tree requests",
       "callbackRequests": "Callback requests",
+      "pledges": "Founders Circle (pledges)",
       "exportCsv": "Export CSV",
       "noRequests": "No requests found.",
       "email": "Email",
@@ -887,6 +946,13 @@
           "called": "Called",
           "missed": "Missed",
           "closed": "Closed",
+          "spam": "Spam"
+        },
+        "pledge": {
+          "pending": "New",
+          "contacted": "Contacted",
+          "converted": "Converted",
+          "cancelled": "Cancelled",
           "spam": "Spam"
         }
       }

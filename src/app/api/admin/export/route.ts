@@ -32,12 +32,28 @@ const EXPORTS = {
     "locale",
     "admin_note",
   ],
+  pledges: [
+    "id",
+    "created_at",
+    "updated_at",
+    "status",
+    "name",
+    "email",
+    "species_code",
+    "source_page",
+    "locale",
+    "admin_note",
+  ],
 } as const;
 
 type ExportType = keyof typeof EXPORTS;
 
 function isExportType(value: string | null): value is ExportType {
-  return value === "tree_requests" || value === "callback_requests";
+  return (
+    value === "tree_requests" ||
+    value === "callback_requests" ||
+    value === "pledges"
+  );
 }
 
 function csvCell(value: unknown): string {

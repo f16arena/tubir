@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { PageIntro } from "@/components/editorial/PageIntro";
+import { SurnameSearch } from "./SurnameSearch";
 
 export default async function AtamekenPage({
   params,
@@ -30,6 +31,12 @@ export default async function AtamekenPage({
           <p className="drop-cap mx-auto max-w-[58ch] text-pretty text-[1.1rem] leading-[1.9] text-foreground/85 sm:text-xl">
             {t("lead")}
           </p>
+        </Reveal>
+      </section>
+
+      <section className="mx-auto mt-16 max-w-3xl px-4 sm:mt-20 sm:px-8">
+        <Reveal>
+          <SurnameSearch />
         </Reveal>
       </section>
 

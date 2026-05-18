@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import {
   isCallbackRequestStatus,
+  isPledgeStatus,
   isTreeRequestStatus,
 } from "@/lib/admin/constants";
 import {
@@ -111,6 +112,31 @@ export async function updateTreeRequest(formData: FormData) {
 
   if (error) {
     console.error("[admin] tree update error:", error);
+  }
+
+  revalidatePath(`/${locale}/admin`);
+}
+
+export async function updatePledge(formData: FormData) {
+  const locale = normalizeAdminLocale(formText(formData, "locale"));
+  await requireAdminUser(locale);
+
+  const id = formText(formData, "id");
+  const status = formText(formData, "status");
+  const adminNote = cleanAdminNote(formText(formData, "admin_note"));
+
+  if (!isUuid(id) || !isPledgeStatus(status)) {
+    return;
+  }
+
+  const supabase = createAdminClient();
+  const { error } = await supabase
+    .from("pledges")
+    .update({ status, admin_note: adminNote })
+    .eq("id", id);
+
+  if (error) {
+    console.error("[admin] pledge update error:", error);
   }
 
   revalidatePath(`/${locale}/admin`);

@@ -3,16 +3,25 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import {
   CALLBACK_REQUEST_STATUSES,
+  PLEDGE_STATUSES,
   TREE_REQUEST_STATUSES,
   isCallbackRequestStatus,
+  isPledgeStatus,
   isTreeRequestStatus,
 } from "@/lib/admin/constants";
 import { requireAdminUser } from "@/lib/admin/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
-import type { CallbackRequest, RequestStatus, TreeRequest } from "@/lib/db/types";
+import type {
+  CallbackRequest,
+  Pledge,
+  PledgeStatus,
+  RequestStatus,
+  TreeRequest,
+} from "@/lib/db/types";
 import {
   signOutAdmin,
   updateCallbackRequest,
+  updatePledge,
   updateTreeRequest,
 } from "@/lib/actions/admin";
 import { Button } from "@/components/ui/button";
@@ -131,6 +140,63 @@ function TreeRequestCard({
   );
 }
 
+function PledgeCard({
+  pledge,
+  locale,
+  t,
+}: {
+  pledge: Pledge;
+  locale: Locale;
+  t: AdminTranslator;
+}) {
+  return (
+    <article className="rounded-lg border border-border bg-background p-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 className="font-medium">{pledge.name}</h3>
+          <p className="text-sm text-muted-foreground">
+            {formatDate(pledge.created_at, locale)}
+          </p>
+        </div>
+        <span className="w-fit rounded-md bg-muted px-2 py-1 text-xs font-medium">
+          {t(`statuses.pledge.${pledge.status}`)}
+        </span>
+      </div>
+
+      <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <Field label={t("email")} value={pledge.email} />
+        <Field label={t("species")} value={adminTextValue(pledge.species_code)} />
+        <Field label={t("source")} value={adminTextValue(pledge.source_page)} />
+        <Field label={t("locale")} value={pledge.locale} />
+        <Field label={t("updatedAt")} value={formatDate(pledge.updated_at, locale)} />
+      </dl>
+
+      <form
+        action={updatePledge}
+        className="mt-4 grid gap-3 sm:grid-cols-[180px_1fr_auto]"
+      >
+        <input type="hidden" name="id" value={pledge.id} />
+        <input type="hidden" name="locale" value={locale} />
+        <StatusSelect
+          name="status"
+          value={pledge.status}
+          statuses={PLEDGE_STATUSES}
+          getLabel={(status) => t(`statuses.pledge.${status}`)}
+        />
+        <input
+          name="admin_note"
+          defaultValue={pledge.admin_note ?? ""}
+          placeholder={t("adminNote")}
+          className="h-8 rounded-lg border border-input bg-background px-3 text-sm"
+        />
+        <Button type="submit" size="sm">
+          {t("save")}
+        </Button>
+      </form>
+    </article>
+  );
+}
+
 function CallbackRequestCard({
   request,
   locale,
@@ -203,15 +269,20 @@ export default async function AdminPage({
 
   const rawTreeStatus = searchValue(search, "treeStatus");
   const rawCallbackStatus = searchValue(search, "callbackStatus");
+  const rawPledgeStatus = searchValue(search, "pledgeStatus");
   const treeStatus: RequestStatus | "all" = isTreeRequestStatus(rawTreeStatus)
     ? rawTreeStatus
     : "all";
   const callbackStatus = isCallbackRequestStatus(rawCallbackStatus)
     ? rawCallbackStatus
     : "all";
+  const pledgeStatus: PledgeStatus | "all" = isPledgeStatus(rawPledgeStatus)
+    ? rawPledgeStatus
+    : "all";
 
   let treeRequests: TreeRequest[] = [];
   let callbackRequests: CallbackRequest[] = [];
+  let pledges: Pledge[] = [];
   let loadError = "";
 
   try {
@@ -230,6 +301,13 @@ export default async function AdminPage({
       )
       .order("created_at", { ascending: false })
       .limit(100);
+    let pledgeQuery = supabase
+      .from("pledges")
+      .select(
+        "id,name,email,species_code,locale,source_page,status,user_agent,ip_hash,identity_hash,admin_note,created_at,updated_at",
+      )
+      .order("created_at", { ascending: false })
+      .limit(100);
 
     if (treeStatus !== "all") {
       treeQuery = treeQuery.eq("status", treeStatus);
@@ -237,14 +315,27 @@ export default async function AdminPage({
     if (callbackStatus !== "all") {
       callbackQuery = callbackQuery.eq("status", callbackStatus);
     }
+    if (pledgeStatus !== "all") {
+      pledgeQuery = pledgeQuery.eq("status", pledgeStatus);
+    }
 
-    const [treeResult, callbackResult] = await Promise.all([treeQuery, callbackQuery]);
-    if (treeResult.error || callbackResult.error) {
+    const [treeResult, callbackResult, pledgeResult] = await Promise.all([
+      treeQuery,
+      callbackQuery,
+      pledgeQuery,
+    ]);
+    if (treeResult.error || callbackResult.error || pledgeResult.error) {
       loadError = t("loadError");
-      console.error("[admin] load error:", treeResult.error, callbackResult.error);
+      console.error(
+        "[admin] load error:",
+        treeResult.error,
+        callbackResult.error,
+        pledgeResult.error,
+      );
     }
     treeRequests = (treeResult.data ?? []) as TreeRequest[];
     callbackRequests = (callbackResult.data ?? []) as CallbackRequest[];
+    pledges = (pledgeResult.data ?? []) as Pledge[];
   } catch (err) {
     loadError = t("configError");
     console.error("[admin] config error:", err);
@@ -306,6 +397,21 @@ export default async function AdminPage({
             ))}
           </select>
         </label>
+        <label className="space-y-1.5 text-sm">
+          <span className="font-medium">{t("pledgeFilter")}</span>
+          <select
+            name="pledgeStatus"
+            defaultValue={pledgeStatus}
+            className="block h-8 rounded-lg border border-input bg-background px-2"
+          >
+            <option value="all">{t("allStatuses")}</option>
+            {PLEDGE_STATUSES.map((status) => (
+              <option key={status} value={status}>
+                {t(`statuses.pledge.${status}`)}
+              </option>
+            ))}
+          </select>
+        </label>
         <Button type="submit" variant="outline" size="sm">
           {t("applyFilters")}
         </Button>
@@ -328,6 +434,34 @@ export default async function AdminPage({
                 <TreeRequestCard
                   key={request.id}
                   request={request}
+                  locale={locale}
+                  t={t}
+                />
+              ))
+            ) : (
+              <p className="rounded-lg border border-border p-4 text-sm text-muted-foreground">
+                {t("noRequests")}
+              </p>
+            )}
+          </div>
+        </section>
+
+        <section>
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="font-heading text-2xl font-semibold">{t("pledges")}</h2>
+            <Link
+              href="/api/admin/export?type=pledges"
+              className="text-sm font-medium text-primary hover:underline"
+            >
+              {t("exportCsv")}
+            </Link>
+          </div>
+          <div className="grid gap-3">
+            {pledges.length ? (
+              pledges.map((pledge) => (
+                <PledgeCard
+                  key={pledge.id}
+                  pledge={pledge}
                   locale={locale}
                   t={t}
                 />

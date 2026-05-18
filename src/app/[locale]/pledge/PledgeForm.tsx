@@ -62,6 +62,11 @@ export function PledgeForm() {
     if (typeof window !== "undefined") {
       setValue("source", window.location.pathname, { shouldDirty: false });
       setValue("startedAt", Date.now(), { shouldDirty: false });
+      const params = new URLSearchParams(window.location.search);
+      const prefillName = params.get("name");
+      if (prefillName) {
+        setValue("name", prefillName.slice(0, 120), { shouldDirty: false });
+      }
     }
   }, [locale, reset, setValue]);
 
